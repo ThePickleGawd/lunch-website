@@ -9,10 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/web-bluetooth": "^0.0.16",
+    "net": "^1.0.2",
     "next": "12.3.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "webbluetooth": "^2.2.0"
+    "tls": "^0.0.1",
+    "webbluetooth": "^2.2.0",
+    "ws": "^8.9.0"
   },
   "devDependencies": {
     "@types/node": "18.11.1",
