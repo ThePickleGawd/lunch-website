@@ -1,10 +1,14 @@
 /* https://www.bekk.christmas/post/2021/12/web-bluetooth */
 
 import * as React from "react";
+
+type ReadCallbackType = (val: string) => void;
+
 export interface BtDevice {
   connect: () => void;
   isConnected: boolean;
-  writeText: (text: string) => void;
+  writeStudentID: (text: string) => boolean;
+  readStudentID: (cb: ReadCallbackType) => void;
 }
 
 export const useBtDevice = (): BtDevice => {
@@ -40,25 +44,29 @@ export const useBtDevice = (): BtDevice => {
       console.log(enc.decode(val));
     });
 
-    char.startNotifications().then(() => {
-      char.addEventListener("characteristicvaluechanged", () => {
-        console.log("something changed");
-      });
-    });
-
     setCharacteristic(char);
     setIsConnected(true);
   };
 
-  const writeText = async (text: string) => {
+  const writeStudentID = (text: string) => {
     var enc = new TextEncoder();
-    await characteristic?.writeValue(enc.encode(text));
-
-    characteristic?.readValue().then((val) => {
-      var enc = new TextDecoder();
-      console.log(enc.decode(val));
+    let success = true;
+    characteristic?.writeValue(enc.encode(text)).catch((err) => {
+      console.log(err);
+      success = false;
     });
+
+    return success;
   };
 
-  return { connect, writeText, isConnected };
+  const readStudentID = async (cb: ReadCallbackType) => {
+    const hex = await characteristic?.readValue();
+
+    var enc = new TextDecoder();
+    const studentID = enc.decode(hex);
+
+    cb(studentID);
+  };
+
+  return { connect, writeStudentID, readStudentID, isConnected };
 };
