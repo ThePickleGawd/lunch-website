@@ -1,15 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { useBtDevice } from "../hooks/useBtDevice";
 
+enum PageState {
+  LANDING,
+  CONNECTED,
+  CONFIRMATION,
+}
+
 const Home: NextPage = () => {
+  const [pageState, setPageState] = useState<PageState>(PageState.LANDING);
   const [text, setText] = useState("");
-  const [finishWriteData, setFinishWriteData] = useState(false);
   const [successWriteData, setSuccessWriteData] = useState(false);
 
   const { connect, isConnected, writeStudentID, readStudentID } = useBtDevice();
+
+  useEffect(() => {
+    if (pageState === PageState.LANDING && isConnected) {
+      setPageState(PageState.CONNECTED);
+    }
+  }, [isConnected, pageState]);
 
   const handleConnect = () => {
     connect();
@@ -17,9 +29,79 @@ const Home: NextPage = () => {
 
   const handleWriteData = () => {
     const success = writeStudentID(text);
+    setSuccessWriteData(success);
+    setPageState(PageState.CONFIRMATION);
+  };
 
-    setFinishWriteData(true);
-    // TODO: success if read value = write value
+  const LandingPage = () => {
+    return (
+      <>
+        <div className="">
+          <button
+            className="bg-gray-900 rounded-lg p-10 font-bold text-2xl"
+            onClick={handleConnect}
+          >
+            Connect to Device
+          </button>
+        </div>
+      </>
+    );
+  };
+
+  const ConnectedPage = () => {
+    return (
+      <>
+        <div className="">
+          <input
+            type="text"
+            id="first_name"
+            className="w-full h-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="950..."
+            required
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
+        </div>
+        <div className="">
+          <button onClick={handleWriteData}>Write to Device</button>
+        </div>
+      </>
+    );
+  };
+
+  const ConfirmationPage = () => {
+    const [schoolID, setSchoolID] = useState("GUNN");
+    const [studentID, setStudentID] = useState("00000000");
+
+    useEffect(() => {
+      const id = readStudentID();
+      setStudentID(id);
+    }, []);
+
+    return (
+      <>
+        <div className="bg-gray-900 rounded-lg flex flex-col justify-center items-center p-5">
+          <div
+            className={` ${
+              successWriteData ? "text-green-500" : "text-red-500"
+            } font-bold text-5xl pt-3`}
+          >
+            {successWriteData ? "Success!" : "Failure!"}
+          </div>
+          <div className="bg-gray-500 m-5 p-12 rounded-lg">
+            <div className="text-gray-300 font-bold text-2xl">
+              Device Settings
+            </div>
+            <div className="text-gray-100 font-bold text-xl">
+              {`School ID: ${schoolID}`}
+            </div>
+            <div className="text-gray-100 font-bold text-xl">
+              {`Student ID: ${studentID}`}
+            </div>
+          </div>
+        </div>
+      </>
+    );
   };
 
   return (
@@ -34,26 +116,11 @@ const Home: NextPage = () => {
         <div className="text-lg">(The Lunch Line FasTrak Device)!</div>
       </div>
       <div className="h-full flex flex-col items-center justify-center space-y-5">
-        <div className="text-5xl font-bold">Type Student ID</div>
-        <div className="">
-          <input
-            type="text"
-            id="first_name"
-            className="w-full h-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="950..."
-            required
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-          />
-        </div>
-        <div className="space-x-5">
-          {!isConnected && (
-            <button onClick={handleConnect}>Connect to Device</button>
-          )}
-          {isConnected && (
-            <button onClick={handleWriteData}>Write to Device</button>
-          )}
-        </div>
+        {pageState == PageState.LANDING && <LandingPage />}
+
+        {pageState == PageState.CONNECTED && <ConnectedPage />}
+
+        {pageState == PageState.CONFIRMATION && <ConfirmationPage />}
       </div>
     </div>
   );

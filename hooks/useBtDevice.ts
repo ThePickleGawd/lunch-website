@@ -1,6 +1,7 @@
 /* https://www.bekk.christmas/post/2021/12/web-bluetooth */
 
 import * as React from "react";
+import { BluetoothRemoteGATTCharacteristic } from "webbluetooth/dist/characteristic";
 
 type ReadCallbackType = (val: string) => void;
 
@@ -8,13 +9,13 @@ export interface BtDevice {
   connect: () => void;
   isConnected: boolean;
   writeStudentID: (text: string) => boolean;
-  readStudentID: (cb: ReadCallbackType) => void;
+  readStudentID: () => string;
 }
 
 export const useBtDevice = (): BtDevice => {
   const [isConnected, setIsConnected] = React.useState(false);
   const [characteristic, setCharacteristic] =
-    React.useState<BluetoothRemoteGATTCharacteristic | null>(null);
+    React.useState<BluetoothRemoteGATTCharacteristic>();
 
   const connect = async () => {
     const device = await navigator.bluetooth.requestDevice({
@@ -44,28 +45,28 @@ export const useBtDevice = (): BtDevice => {
       console.log(enc.decode(val));
     });
 
-    setCharacteristic(char);
+    setCharacteristic(char as BluetoothRemoteGATTCharacteristic | undefined);
     setIsConnected(true);
   };
 
   const writeStudentID = (text: string) => {
     var enc = new TextEncoder();
-    let success = true;
     characteristic?.writeValue(enc.encode(text)).catch((err) => {
       console.log(err);
-      success = false;
     });
 
-    return success;
+    // Successful if the value we want to write is the same as the value we read
+    return text === readStudentID();
   };
 
-  const readStudentID = async (cb: ReadCallbackType) => {
-    const hex = await characteristic?.readValue();
+  const readStudentID = () => {
+    let hex;
+    characteristic?.readValue().then((val) => {
+      hex = val;
+    });
 
     var enc = new TextDecoder();
-    const studentID = enc.decode(hex);
-
-    cb(studentID);
+    return enc.decode(hex);
   };
 
   return { connect, writeStudentID, readStudentID, isConnected };
