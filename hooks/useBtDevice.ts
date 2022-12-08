@@ -2,20 +2,25 @@
 
 import * as React from "react";
 import { BluetoothRemoteGATTCharacteristic } from "webbluetooth/dist/characteristic";
+import { useSleep } from "./useSleep";
 
-type ReadCallbackType = (val: string) => void;
+type Characteristic = BluetoothRemoteGATTCharacteristic | undefined;
 
 export interface BtDevice {
-  connect: () => void;
+  connect: () => Promise<void>;
   isConnected: boolean;
-  writeStudentID: (text: string) => boolean;
-  readStudentID: () => string;
+  writeStudentID: (text: string) => Promise<boolean>;
+  writeSchoolID: (text: string) => Promise<boolean>;
+  readSchoolID: () => Promise<string>;
+  readStudentID: () => Promise<string>;
 }
 
 export const useBtDevice = (): BtDevice => {
   const [isConnected, setIsConnected] = React.useState(false);
-  const [characteristic, setCharacteristic] =
-    React.useState<BluetoothRemoteGATTCharacteristic>();
+  const [schoolIDChar, setSchoolIDChar] = React.useState<Characteristic>();
+  const [studentIDChar, setStudentIDChar] = React.useState<Characteristic>();
+
+  const { sleep } = useSleep();
 
   const connect = async () => {
     const device = await navigator.bluetooth.requestDevice({
@@ -36,38 +41,63 @@ export const useBtDevice = (): BtDevice => {
       "11435b92-3653-4ab9-8c50-399456922854"
     );
 
-    const char = await service.getCharacteristic(
+    const charSchoolID = await service.getCharacteristic(
+      "228f4919-f4f8-4bb5-ba38-243a110b7a24"
+    );
+
+    const charStudentID = await service.getCharacteristic(
       "33f68a3f-e981-4fd8-a13c-b6a0edd1928d"
     );
 
-    char.readValue().then((val) => {
-      var enc = new TextDecoder();
-      console.log(enc.decode(val));
-    });
-
-    setCharacteristic(char as BluetoothRemoteGATTCharacteristic | undefined);
+    setSchoolIDChar(charSchoolID as Characteristic);
+    setStudentIDChar(charStudentID as Characteristic);
     setIsConnected(true);
   };
 
-  const writeStudentID = (text: string) => {
+  const writeSchoolID = async (text: string) => {
     var enc = new TextEncoder();
-    characteristic?.writeValue(enc.encode(text)).catch((err) => {
+    schoolIDChar?.writeValue(enc.encode(text)).catch((err) => {
       console.log(err);
     });
 
     // Successful if the value we want to write is the same as the value we read
-    return text === readStudentID();
+    return text === (await readSchoolID());
   };
 
-  const readStudentID = () => {
-    let hex;
-    characteristic?.readValue().then((val) => {
-      hex = val;
+  const writeStudentID = async (text: string) => {
+    var enc = new TextEncoder();
+    studentIDChar?.writeValue(enc.encode(text)).catch((err) => {
+      console.log(err);
     });
 
+    sleep(150);
+
+    return text === (await readStudentID());
+  };
+
+  const readSchoolID = async () => {
+    let hex = await schoolIDChar?.readValue();
     var enc = new TextDecoder();
+
+    console.log("Read SchoolID: " + enc.decode(hex));
+
     return enc.decode(hex);
   };
 
-  return { connect, writeStudentID, readStudentID, isConnected };
+  const readStudentID = async () => {
+    let hex = await studentIDChar?.readValue();
+    var enc = new TextDecoder();
+
+    console.log("Read StudentID: " + enc.decode(hex));
+    return enc.decode(hex);
+  };
+
+  return {
+    connect,
+    writeStudentID,
+    writeSchoolID,
+    readStudentID,
+    readSchoolID,
+    isConnected,
+  };
 };

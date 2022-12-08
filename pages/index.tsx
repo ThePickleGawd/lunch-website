@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { useBtDevice } from "../hooks/useBtDevice";
+import { useSleep } from "../hooks/useSleep";
 
 enum PageState {
   LANDING,
@@ -14,8 +15,12 @@ const Home: NextPage = () => {
   const [pageState, setPageState] = useState<PageState>(PageState.LANDING);
   const [text, setText] = useState("");
   const [successWriteData, setSuccessWriteData] = useState(false);
+  const [schoolID, setSchoolID] = useState("Loading...");
+  const [studentID, setStudentID] = useState("Loading...");
 
-  const { connect, isConnected, writeStudentID, readStudentID } = useBtDevice();
+  const { connect, isConnected, writeStudentID, readStudentID, readSchoolID } =
+    useBtDevice();
+  const { sleep } = useSleep();
 
   useEffect(() => {
     if (pageState === PageState.LANDING && isConnected) {
@@ -23,85 +28,22 @@ const Home: NextPage = () => {
     }
   }, [isConnected, pageState]);
 
-  const handleConnect = () => {
-    connect();
+  const handleConnect = async () => {
+    await connect();
   };
 
-  const handleWriteData = () => {
-    const success = writeStudentID(text);
+  const handleWriteData = async () => {
+    const success = await writeStudentID(text);
     setSuccessWriteData(success);
     setPageState(PageState.CONFIRMATION);
-  };
 
-  const LandingPage = () => {
-    return (
-      <>
-        <div className="">
-          <button
-            className="bg-gray-900 rounded-lg p-10 font-bold text-2xl"
-            onClick={handleConnect}
-          >
-            Connect to Device
-          </button>
-        </div>
-      </>
-    );
-  };
+    if (!success) return;
 
-  const ConnectedPage = () => {
-    return (
-      <>
-        <div className="">
-          <input
-            type="text"
-            id="first_name"
-            className="w-full h-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="950..."
-            required
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-          />
-        </div>
-        <div className="">
-          <button onClick={handleWriteData}>Write to Device</button>
-        </div>
-      </>
-    );
-  };
+    const schoolID_val = await readSchoolID();
+    const studentID_val = await readStudentID();
 
-  const ConfirmationPage = () => {
-    const [schoolID, setSchoolID] = useState("GUNN");
-    const [studentID, setStudentID] = useState("00000000");
-
-    useEffect(() => {
-      const id = readStudentID();
-      setStudentID(id);
-    }, []);
-
-    return (
-      <>
-        <div className="bg-gray-900 rounded-lg flex flex-col justify-center items-center p-5">
-          <div
-            className={` ${
-              successWriteData ? "text-green-500" : "text-red-500"
-            } font-bold text-5xl pt-3`}
-          >
-            {successWriteData ? "Success!" : "Failure!"}
-          </div>
-          <div className="bg-gray-500 m-5 p-12 rounded-lg">
-            <div className="text-gray-300 font-bold text-2xl">
-              Device Settings
-            </div>
-            <div className="text-gray-100 font-bold text-xl">
-              {`School ID: ${schoolID}`}
-            </div>
-            <div className="text-gray-100 font-bold text-xl">
-              {`Student ID: ${studentID}`}
-            </div>
-          </div>
-        </div>
-      </>
-    );
+    setSchoolID(schoolID_val);
+    setStudentID(studentID_val);
   };
 
   return (
@@ -116,11 +58,61 @@ const Home: NextPage = () => {
         <div className="text-lg">(The Lunch Line FasTrak Device)!</div>
       </div>
       <div className="h-full flex flex-col items-center justify-center space-y-5">
-        {pageState == PageState.LANDING && <LandingPage />}
+        {pageState == PageState.LANDING && (
+          <>
+            <div className="">
+              <button
+                className="bg-gray-900 rounded-lg p-10 font-bold text-2xl"
+                onClick={handleConnect}
+              >
+                Connect to Device
+              </button>
+            </div>
+          </>
+        )}
 
-        {pageState == PageState.CONNECTED && <ConnectedPage />}
+        {pageState == PageState.CONNECTED && (
+          <>
+            <div className="">
+              <input
+                type="text"
+                className="w-full h-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="950..."
+                required
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+              />
+            </div>
+            <div className="">
+              <button onClick={handleWriteData}>Write to Device</button>
+            </div>
+          </>
+        )}
 
-        {pageState == PageState.CONFIRMATION && <ConfirmationPage />}
+        {pageState == PageState.CONFIRMATION && (
+          <>
+            <div className="bg-gray-900 rounded-lg flex flex-col justify-center items-center p-5">
+              <div
+                className={` ${
+                  successWriteData ? "text-green-500" : "text-red-500"
+                } font-bold text-5xl pt-3`}
+              >
+                {successWriteData ? "Success!" : "Failure!"}
+              </div>
+              <div className="bg-gray-500 m-5 p-12 rounded-lg">
+                <div className="text-gray-300 font-bold text-2xl">
+                  Device Settings
+                </div>
+                <div className="text-gray-100 font-bold text-xl">
+                  {`School ID: ${schoolID}`}
+                </div>
+                <div className="text-gray-100 font-bold text-xl">
+                  {`Student ID: ${studentID}`}
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
