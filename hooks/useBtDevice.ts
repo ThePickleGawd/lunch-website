@@ -60,6 +60,8 @@ export const useBtDevice = (): BtDevice => {
       console.log(err);
     });
 
+    await sleep(500);
+
     // Successful if the value we want to write is the same as the value we read
     return text === (await readSchoolID());
   };
@@ -70,7 +72,7 @@ export const useBtDevice = (): BtDevice => {
       console.log(err);
     });
 
-    sleep(150);
+    await sleep(500);
 
     return text === (await readStudentID());
   };
