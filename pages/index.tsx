@@ -10,6 +10,7 @@ enum PageState {
   LANDING,
   CONNECTED,
   CONFIRMATION,
+  ERROR,
 }
 
 const Home: NextPage = () => {
@@ -34,6 +35,10 @@ const Home: NextPage = () => {
       setPageState(PageState.CONNECTED);
     }
   }, [isConnected, pageState]);
+
+  useEffect(() => {
+    if (!supportsBluetooth) setPageState(PageState.ERROR);
+  }, [supportsBluetooth]);
 
   const handleConnect = async () => {
     await connect();
