@@ -76,8 +76,8 @@ const Home: NextPage = () => {
       {!supportsBluetooth && (
         <div className="w-full h-full flex justify-center items-center">
           <div className="m-10 text-lg text-center">
-            Sorry, this browser does not support bluetooth. Use a chrome or edge
-            on a laptop or an android device instead
+            Sorry, this browser does not support bluetooth. Use <b>Chrome</b> or{" "}
+            <b>Edge</b> on a laptop or an android device instead
             <br />
             <a
               className="text-blue-400 underline"
@@ -85,6 +85,17 @@ const Home: NextPage = () => {
             >
               Learn More
             </a>
+            <br />
+          </div>
+          <div className="fixed bottom-0 m-5">
+            If you do not have access to a laptop or android device, download{" "}
+            <a
+              className="text-blue-400 underline"
+              href="https://apps.apple.com/us/app/bluefy-web-ble-browser/id1492822055"
+            >
+              Bluefy Browser
+            </a>{" "}
+            on the App Store
           </div>
         </div>
       )}
