@@ -9,7 +9,7 @@ type Characteristic = BluetoothRemoteGATTCharacteristic | undefined;
 export interface BtDevice {
   supportsBluetooth: boolean;
   isConnected: boolean;
-  connect: () => Promise<void>;
+  pairDevice: () => Promise<void>;
   writeStudentID: (text: string) => Promise<boolean>;
   writeSchoolID: (text: string) => Promise<boolean>;
   readSchoolID: () => Promise<string>;
@@ -30,18 +30,24 @@ export const useBtDevice = (): BtDevice => {
     });
   }, []);
 
-  const connect = async () => {
-    const device = await navigator.bluetooth.requestDevice({
-      filters: [
-        {
-          services: ["11435b92-3653-4ab9-8c50-399456922854"],
-        },
-      ],
-    });
-    const server = await device.gatt?.connect();
+  const pairDevice = async () => {
+    const options = {
+      filters: [{ services: ["11435b92-3653-4ab9-8c50-399456922854"] }],
+    };
 
-    if (server === undefined) {
-      console.log("Could not connect to gatt???");
+    const device = await navigator.bluetooth.requestDevice(options);
+
+    const onDisconnected = async () => {
+      console.log("Disconnected from device");
+      await connect(device);
+    };
+
+    device.addEventListener("gattserverdisconnected", onDisconnected);
+
+    const server = await connect(device);
+
+    if (!server) {
+      console.log("Could not connect to GATT Server");
       return;
     }
 
@@ -49,10 +55,12 @@ export const useBtDevice = (): BtDevice => {
       "11435b92-3653-4ab9-8c50-399456922854"
     );
 
+    // School Characteristic UUID
     const charSchoolID = await service.getCharacteristic(
       "228f4919-f4f8-4bb5-ba38-243a110b7a24"
     );
 
+    // Student Characteristic UUID
     const charStudentID = await service.getCharacteristic(
       "33f68a3f-e981-4fd8-a13c-b6a0edd1928d"
     );
@@ -81,31 +89,85 @@ export const useBtDevice = (): BtDevice => {
     });
 
     await sleep(500);
-
-    return text === (await readStudentID());
+    const val = await readStudentID();
+    console.log(text + " " + val);
+    return text === val;
   };
 
   const readSchoolID = async () => {
     let hex = await schoolIDChar?.readValue();
     var enc = new TextDecoder();
 
-    console.log("Read SchoolID: " + enc.decode(hex));
-
-    return enc.decode(hex);
+    let schoolID = enc.decode(hex).replace("/s+g", "");
+    console.log("Read SchoolID: " + schoolID);
+    return schoolID;
   };
 
   const readStudentID = async () => {
     let hex = await studentIDChar?.readValue();
     var enc = new TextDecoder();
 
-    console.log("Read StudentID: " + enc.decode(hex));
-    return enc.decode(hex);
+    let studentID = enc.decode(hex).replace("/s+g", "");
+    console.log("Read StudentID: " + studentID);
+    return studentID;
+  };
+
+  const connect = async (
+    device: BluetoothDevice
+  ): Promise<BluetoothRemoteGATTServer | null> => {
+    try {
+      const server = await exponentialBackoff(
+        3,
+        2,
+        async (): Promise<BluetoothRemoteGATTServer | undefined> => {
+          time(`Connecting to ${device.name}...`);
+          return await device.gatt?.connect();
+        }
+      );
+
+      return server as BluetoothRemoteGATTServer;
+    } catch (err) {
+      time(`Failed to connect to ${device.name}...`);
+      return null;
+    }
+  };
+
+  const exponentialBackoff = async (
+    max: number,
+    delay: number,
+    toTry: () => void
+  ) => {
+    return new Promise((resolve, reject) => {
+      _exponentialBackoff(max, delay, toTry, resolve, reject);
+    });
+  };
+
+  const _exponentialBackoff = async (
+    max: number,
+    delay: number,
+    toTry: () => void,
+    success: (value: unknown) => void,
+    fail: (value: unknown) => void
+  ) => {
+    try {
+      success(await toTry());
+    } catch (error) {
+      if (max === 0) return fail(error);
+      time("Retrying in " + delay + "s... (" + max + " retries left");
+      setTimeout(() => {
+        _exponentialBackoff(--max, delay * 2, toTry, success, fail);
+      }, delay * 1000);
+    }
+  };
+
+  const time = (text: string) => {
+    console.log(`[${new Date().toJSON().substring(11, 19)}]${text}`);
   };
 
   return {
     supportsBluetooth,
     isConnected,
-    connect,
+    pairDevice,
     writeStudentID,
     writeSchoolID,
     readStudentID,

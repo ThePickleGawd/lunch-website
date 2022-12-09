@@ -23,7 +23,7 @@ const Home: NextPage = () => {
   const {
     supportsBluetooth,
     isConnected,
-    connect,
+    pairDevice,
     writeStudentID,
     readStudentID,
     readSchoolID,
@@ -40,15 +40,7 @@ const Home: NextPage = () => {
     if (!supportsBluetooth) setPageState(PageState.ERROR);
   }, [supportsBluetooth]);
 
-  const handleConnect = async () => {
-    await connect();
-  };
-
-  const handleWriteData = async () => {
-    const success = await writeStudentID(text);
-    setSuccessWriteData(success);
-    setPageState(PageState.CONFIRMATION);
-
+  const refreshLunchData = async () => {
     await sleep(500);
     const schoolID_val = await readSchoolID();
     await sleep(500);
@@ -56,6 +48,21 @@ const Home: NextPage = () => {
 
     setSchoolID(schoolID_val);
     setStudentID(studentID_val);
+  };
+
+  const handleConnect = async () => {
+    // Connect then set lunch data
+    await pairDevice();
+    await refreshLunchData();
+  };
+
+  const handleWriteData = async () => {
+    // Write data, then read response
+    const success = await writeStudentID(text);
+    await refreshLunchData();
+
+    setSuccessWriteData(success);
+    setPageState(PageState.CONFIRMATION);
   };
 
   return (
@@ -74,9 +81,19 @@ const Home: NextPage = () => {
         </div>
       )}
       {isConnected && (
-        <div className="bg-white fixed rounded-lg right-0 mt-10 mr-12 p-2">
-          <Image width={80} height={80} src={ConnectedIcon} alt="connected" />
-          <div className="text-black">Connected</div>
+        <div className="bg-white fixed rounded-lg right-0 mt-10 mr-12 p-2 hover:w-80 z-10">
+          <div className="w-full flex flex-col justify-center items-center">
+            <div>
+              <Image
+                width={80}
+                height={80}
+                src={ConnectedIcon}
+                alt="connected"
+              />
+              <div className="text-black">Connected</div>
+            </div>
+          </div>
+          <div></div>
         </div>
       )}
       <div className="fixed top-0 w-full flex flex-col items-center justify-center space-y-3">
