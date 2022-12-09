@@ -24,10 +24,15 @@ export const useBtDevice = (): BtDevice => {
 
   const { sleep } = useSleep();
 
+  // Check if device supports BLE
   React.useEffect(() => {
-    navigator.bluetooth.getAvailability().then((avaliable) => {
-      setSupportsBluetooth(avaliable);
-    });
+    if (navigator.bluetooth === undefined) {
+      setSupportsBluetooth(false);
+    } else {
+      navigator.bluetooth.getAvailability().then((avaliable) => {
+        setSupportsBluetooth(avaliable);
+      });
+    }
   }, []);
 
   const pairDevice = async () => {
@@ -37,9 +42,10 @@ export const useBtDevice = (): BtDevice => {
 
     const device = await navigator.bluetooth.requestDevice(options);
 
-    const onDisconnected = async () => {
-      console.log("Disconnected from device");
-      await connect(device);
+    const onDisconnected = async (e: Event) => {
+      const _device = e.target as BluetoothDevice;
+      console.log("Disconnected from device: " + _device.name);
+      await connect(_device);
     };
 
     device.addEventListener("gattserverdisconnected", onDisconnected);
@@ -47,10 +53,11 @@ export const useBtDevice = (): BtDevice => {
     const server = await connect(device);
 
     if (!server) {
-      console.log("Could not connect to GATT Server");
+      console.error("Bruh could not connect to GATT Server");
       return;
     }
 
+    // Lunch GATT service UUID
     const service = await server.getPrimaryService(
       "11435b92-3653-4ab9-8c50-399456922854"
     );

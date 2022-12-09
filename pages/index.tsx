@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useBtDevice } from "../hooks/useBtDevice";
 import { useSleep } from "../hooks/useSleep";
 import ConnectedIcon from "../public/connected.svg";
+import Link from "next/link";
 
 enum PageState {
   LANDING,
@@ -75,8 +76,15 @@ const Home: NextPage = () => {
       {!supportsBluetooth && (
         <div className="w-full h-full flex justify-center items-center">
           <div className="m-10 text-lg text-center">
-            Sorry, your device does not support bluetooth. Use a laptop or an
-            android device instead
+            Sorry, this browser does not support bluetooth. Use a chrome or edge
+            on a laptop or an android device instead
+            <br />
+            <a
+              className="text-blue-400 underline"
+              href="https://caniuse.com/web-bluetooth"
+            >
+              Learn More
+            </a>
           </div>
         </div>
       )}
