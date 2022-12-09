@@ -7,8 +7,9 @@ import { useSleep } from "./useSleep";
 type Characteristic = BluetoothRemoteGATTCharacteristic | undefined;
 
 export interface BtDevice {
-  connect: () => Promise<void>;
+  supportsBluetooth: boolean;
   isConnected: boolean;
+  connect: () => Promise<void>;
   writeStudentID: (text: string) => Promise<boolean>;
   writeSchoolID: (text: string) => Promise<boolean>;
   readSchoolID: () => Promise<string>;
@@ -19,8 +20,15 @@ export const useBtDevice = (): BtDevice => {
   const [isConnected, setIsConnected] = React.useState(false);
   const [schoolIDChar, setSchoolIDChar] = React.useState<Characteristic>();
   const [studentIDChar, setStudentIDChar] = React.useState<Characteristic>();
+  const [supportsBluetooth, setSupportsBluetooth] = React.useState(true);
 
   const { sleep } = useSleep();
+
+  React.useEffect(() => {
+    navigator.bluetooth.getAvailability().then((avaliable) => {
+      setSupportsBluetooth(avaliable);
+    });
+  }, []);
 
   const connect = async () => {
     const device = await navigator.bluetooth.requestDevice({
@@ -95,11 +103,12 @@ export const useBtDevice = (): BtDevice => {
   };
 
   return {
+    supportsBluetooth,
+    isConnected,
     connect,
     writeStudentID,
     writeSchoolID,
     readStudentID,
     readSchoolID,
-    isConnected,
   };
 };
