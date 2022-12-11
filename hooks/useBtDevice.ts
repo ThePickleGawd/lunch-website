@@ -124,7 +124,7 @@ export const useBtDevice = (): BtDevice => {
   ): Promise<BluetoothRemoteGATTServer | null> => {
     try {
       const server = await exponentialBackoff(
-        3,
+        4,
         2,
         async (): Promise<BluetoothRemoteGATTServer | undefined> => {
           time(`Connecting to ${device.name}...`);
@@ -142,7 +142,7 @@ export const useBtDevice = (): BtDevice => {
   const exponentialBackoff = async (
     max: number,
     delay: number,
-    toTry: () => void
+    toTry: () => Promise<BluetoothRemoteGATTServer | undefined>
   ) => {
     return new Promise((resolve, reject) => {
       _exponentialBackoff(max, delay, toTry, resolve, reject);
@@ -152,7 +152,7 @@ export const useBtDevice = (): BtDevice => {
   const _exponentialBackoff = async (
     max: number,
     delay: number,
-    toTry: () => void,
+    toTry: () => Promise<BluetoothRemoteGATTServer | undefined>,
     success: (value: unknown) => void,
     fail: (value: unknown) => void
   ) => {
