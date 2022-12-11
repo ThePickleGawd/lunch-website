@@ -35,6 +35,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     if (pageState === PageState.LANDING && isConnected) {
       setPageState(PageState.CONNECTED);
+      refreshLunchData();
     }
   }, [isConnected, pageState]);
 
@@ -55,12 +56,14 @@ const Home: NextPage = () => {
   const handleConnect = () => {
     // Connect then set lunch data
     setLoading(true);
-    pairDevice().then(() => {
-      sleep(2000).then(() => {
-        refreshLunchData();
+    pairDevice()
+      .then(() => {
+        setLoading(false);
+      })
+      .catch((e) => {
+        console.log(e);
         setLoading(false);
       });
-    });
   };
 
   const handleWriteData = async () => {
@@ -219,8 +222,12 @@ const Home: NextPage = () => {
             </div>
             <div className="">
               {showConfirmation ? (
-                <div className="text-green-500 font-bold py-2 px-4">
-                  Success!
+                <div
+                  className={`${
+                    successWriteData ? "text-green-500" : "text-red-500"
+                  } font-bold py-2 px-4`}
+                >
+                  {successWriteData ? "Success!" : "Failed"}
                 </div>
               ) : (
                 <button

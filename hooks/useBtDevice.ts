@@ -51,30 +51,6 @@ export const useBtDevice = (): BtDevice => {
     device.addEventListener("gattserverdisconnected", onDisconnected);
 
     const server = await connect(device);
-
-    if (!server) {
-      console.error("Bruh could not connect to GATT Server");
-      return;
-    }
-
-    // Lunch GATT service UUID
-    const service = await server.getPrimaryService(
-      "11435b92-3653-4ab9-8c50-399456922854"
-    );
-
-    // School Characteristic UUID
-    const charSchoolID = await service.getCharacteristic(
-      "228f4919-f4f8-4bb5-ba38-243a110b7a24"
-    );
-
-    // Student Characteristic UUID
-    const charStudentID = await service.getCharacteristic(
-      "33f68a3f-e981-4fd8-a13c-b6a0edd1928d"
-    );
-
-    setSchoolIDChar(charSchoolID as Characteristic);
-    setStudentIDChar(charStudentID as Characteristic);
-    setIsConnected(true);
   };
 
   const writeSchoolID = async (text: string) => {
@@ -96,17 +72,16 @@ export const useBtDevice = (): BtDevice => {
     });
 
     await sleep(500);
-    const val = await readStudentID();
-    console.log(text + " " + val);
-    return text === val;
+
+    // Successful if the value we want to write is the same as the value we read
+    return text === (await readStudentID());
   };
 
   const readSchoolID = async () => {
     let hex = await schoolIDChar?.readValue();
     var enc = new TextDecoder();
 
-    let schoolID = enc.decode(hex).replace("/s+g", "");
-    console.log("Read SchoolID: " + schoolID);
+    let schoolID = enc.decode(hex).replace(/\0/g, "");
     return schoolID;
   };
 
@@ -114,8 +89,7 @@ export const useBtDevice = (): BtDevice => {
     let hex = await studentIDChar?.readValue();
     var enc = new TextDecoder();
 
-    let studentID = enc.decode(hex).replace("/s+g", "");
-    console.log("Read StudentID: " + studentID);
+    let studentID = enc.decode(hex).replace(/\0/g, "");
     return studentID;
   };
 
@@ -128,7 +102,30 @@ export const useBtDevice = (): BtDevice => {
         2,
         async (): Promise<BluetoothRemoteGATTServer | undefined> => {
           time(`Connecting to ${device.name}...`);
-          return await device.gatt?.connect();
+          let server = await device.gatt?.connect();
+
+          if (!server) throw new Error("Could not connect to GATT Server");
+
+          // Lunch GATT service UUID
+          const service = await server.getPrimaryService(
+            "11435b92-3653-4ab9-8c50-399456922854"
+          );
+
+          // School Characteristic UUID
+          const charSchoolID = await service.getCharacteristic(
+            "228f4919-f4f8-4bb5-ba38-243a110b7a24"
+          );
+
+          // Student Characteristic UUID
+          const charStudentID = await service.getCharacteristic(
+            "33f68a3f-e981-4fd8-a13c-b6a0edd1928d"
+          );
+
+          setSchoolIDChar(charSchoolID as Characteristic);
+          setStudentIDChar(charStudentID as Characteristic);
+          setIsConnected(true);
+
+          return server;
         }
       );
 
