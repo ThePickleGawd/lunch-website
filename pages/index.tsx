@@ -6,6 +6,7 @@ import { useBtDevice } from "../hooks/useBtDevice";
 import { useSleep } from "../hooks/useSleep";
 import BLEIcon from "../public/ble.svg";
 import BLEHoverIcon from "../public/bleHover.svg";
+import LunchTrakLogo from "../public/LunchTrak.svg";
 import { useSession, signIn, signOut } from "next-auth/react";
 import GoogleButton from "react-google-button";
 
@@ -209,6 +210,9 @@ const Home: NextPage = () => {
         </div>
       )}
       <div className="fixed top-0 w-full flex flex-col items-center justify-center space-y-3">
+        {/* <button className="w-64 h-32">
+          <Image src={LunchTrakLogo} alt="LunchTrak Logo" />
+        </button> */}
         <div className="text-5xl font-bold pt-10 bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">
           LunchTrak
         </div>
