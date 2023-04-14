@@ -67,6 +67,11 @@ const Home: NextPage = () => {
   };
 
   const handleWriteData = async () => {
+    if (!text.startsWith("950") || text.length != 8) {
+      alert("Wrong student ID, please check.");
+      return false;
+    }
+
     setLoading(true);
 
     const success = await writeStudentID(text);
