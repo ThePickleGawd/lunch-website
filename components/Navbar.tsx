@@ -65,10 +65,10 @@ const Navbar = () => {
                       </Link>
                     ))}
                     <Link
-                      href="/"
+                      href="/pair"
                       className="w-full px-6 py-2 mt-3 text-center text-white bg-emerald-600 rounded-md lg:ml-5"
                     >
-                      Get Started
+                      Pair LunchTrak Tags
                     </Link>
                   </>
                 </Disclosure.Panel>
