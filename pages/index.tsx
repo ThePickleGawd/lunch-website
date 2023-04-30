@@ -26,9 +26,9 @@ const Home = () => {
       <Navbar />
       <Hero />
       <SectionTitle pretitle="LunchTrak Benefits" title="Why use LunchTrak?">
-        Lunch is extremely important for high school students to explore clubs
-        and attend school events. LunchTrak helps avoid the boring wait times
-        and gets you to your activites faster
+        Students spend lunch making new friends and exploring their passions.
+        With LunchTrak, your school can give back the time students spend in
+        boring lines.
       </SectionTitle>
       <Benefits data={benefitOne} />
       <Benefits imgPos="right" data={benefitTwo} />
