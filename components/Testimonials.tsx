@@ -57,7 +57,11 @@ const Testimonials = () => {
   );
 };
 
-function Avatar(props) {
+function Avatar(props: {
+  image: any;
+  name: string;
+  title: string;
+}): JSX.Element {
   return (
     <div className="flex items-center mt-8 space-x-3">
       <div className="flex-shrink-0 overflow-hidden rounded-full w-14 h-14">
@@ -77,7 +81,7 @@ function Avatar(props) {
   );
 }
 
-function Mark(props) {
+function Mark(props: { children: React.ReactNode }) {
   return (
     <>
       {" "}

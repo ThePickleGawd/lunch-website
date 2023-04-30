@@ -9,10 +9,10 @@ interface BenefitProps {
 }
 
 interface BenefitsProps {
-  imgPos: "right" | "left";
+  imgPos?: "right" | "left";
   data: {
     title: string;
-    imgPos: "right" | "left";
+    imgPos?: "right" | "left";
     image: StaticImageData;
     desc: string;
     bullets: Array<BenefitProps & { desc: string }>;

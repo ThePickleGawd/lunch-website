@@ -10,7 +10,6 @@ import Footer from "../components/Footer";
 import Testimonials from "../components/Testimonials";
 import Cta from "../components/CTA";
 import Faq from "../components/FAQ";
-import PopupWidget from "../components/PopupWidget";
 
 const Home = () => {
   return (
@@ -56,7 +55,6 @@ const Home = () => {
       <Faq />
       <Cta />
       <Footer />
-      {/* <PopupWidget /> */}
     </>
   );
 };
