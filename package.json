@@ -10,11 +10,14 @@
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
-    "@types/web-bluetooth": "^0.0.16",
+    "@headlessui/react": "^1.7.14",
+    "@heroicons/react": "^2.0.17",
     "net": "^1.0.2",
     "next": "13.1.6",
+    "next-themes": "^0.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.43.9",
     "react-icons": "^4.7.1",
     "tls": "^0.0.1",
     "webbluetooth": "^2.2.0",
@@ -24,6 +27,7 @@
     "@types/node": "18.11.1",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
+    "@types/web-bluetooth": "^0.0.16",
     "autoprefixer": "^10.4.12",
     "eslint": "8.25.0",
     "eslint-config-next": "13.1.6",

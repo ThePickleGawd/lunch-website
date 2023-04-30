@@ -1,39 +1,62 @@
-import { useEffect, useState } from "react";
-import type { NextPage } from "next";
 import Head from "next/head";
-import Navbar from "@/components/shared/Navbar";
+import Hero from "../components/Hero";
+import Navbar from "../components/Navbar";
+import SectionTitle from "../components/SectionTitle";
 
-const Home: NextPage = () => {
+import { benefitOne, benefitTwo } from "../components/Data";
+import Video from "../components/Video";
+import Benefits from "../components/Benefits";
+import Footer from "../components/Footer";
+import Testimonials from "../components/Testimonials";
+import Cta from "../components/CTA";
+import Faq from "../components/FAQ";
+import PopupWidget from "../components/PopupWidget";
+
+const Home = () => {
   return (
     <>
       <Head>
-        <title>LunchTrak Landing Page</title>
-        <meta name="description" content="LunchTrak Landing Page" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>LunchTrak - No More Waiting For Food</title>
+        <meta
+          name="description"
+          content="LunchTrak helps you avoid long school lunch lines through automatic, wireless check-in."
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <div className="w-screen px-4 py-10">
-        <div>
-          <div className="px-4">
-            <div className="text-3xl text-primary-dark font-bold text-center">
-              Stop waiting so long for lunch.
-            </div>
-            <div className="hidden md:block">
-              <div>
-                Replace slow keypads and scanners with automatic student ID
-                detection
-              </div>
-              <button className="font-bold">Learn More</button>
-            </div>
-          </div>
-          <div className="w-full px-16 mt-8">
-            <div className="bg-primary rounded-3xl w-full h-64 text-center font-bold text-white text-xl py-8">
-              LunchTrak
-            </div>
-          </div>
-        </div>
-      </div>
+      <Hero />
+      <SectionTitle pretitle="LunchTrak Benefits" title="Why use LunchTrak?">
+        Lunch is extremely important for high school students to explore clubs
+        and attend school events. LunchTrak helps avoid the boring wait times
+        and gets you to your activites faster
+      </SectionTitle>
+      <Benefits data={benefitOne} />
+      <Benefits imgPos="right" data={benefitTwo} />
+      <SectionTitle
+        pretitle="Watch a video"
+        title="Learn how to fullfil your needs"
+      >
+        This section is to highlight a promo or demo video of your product.
+        Analysts says a landing page with video has 3% more conversion rate. So,
+        don&apos;t forget to add one. Just like this.
+      </SectionTitle>
+      <Video />
+      {/* <SectionTitle
+        pretitle="Testimonials"
+        title="Here's what our customers said"
+      >
+        Testimonails is a great way to increase the brand trust and awareness.
+        Use this section to highlight your popular customers.
+      </SectionTitle>
+      <Testimonials /> */}
+      <SectionTitle pretitle="FAQ" title="Frequently Asked Questions">
+        Answer your customers possible questions here, it will increase the
+        conversion rate as well as support or chat requests.
+      </SectionTitle>
+      <Faq />
+      <Cta />
+      <Footer />
+      {/* <PopupWidget /> */}
     </>
   );
 };

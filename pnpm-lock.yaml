@@ -1,47 +1,54 @@
 lockfileVersion: 5.4
 
-importers:
+specifiers:
+  '@headlessui/react': ^1.7.14
+  '@heroicons/react': ^2.0.17
+  '@types/node': 18.11.1
+  '@types/react': 18.0.21
+  '@types/react-dom': 18.0.6
+  '@types/web-bluetooth': ^0.0.16
+  autoprefixer: ^10.4.12
+  eslint: 8.25.0
+  eslint-config-next: 13.1.6
+  net: ^1.0.2
+  next: 13.1.6
+  next-themes: ^0.2.1
+  postcss: ^8.4.18
+  react: 18.2.0
+  react-dom: 18.2.0
+  react-hook-form: ^7.43.9
+  react-icons: ^4.7.1
+  tailwindcss: ^3.1.8
+  tls: ^0.0.1
+  typescript: 4.8.4
+  webbluetooth: ^2.2.0
+  ws: ^8.9.0
 
-  .:
-    specifiers:
-      '@types/node': 18.11.1
-      '@types/react': 18.0.21
-      '@types/react-dom': 18.0.6
-      '@types/web-bluetooth': ^0.0.16
-      autoprefixer: ^10.4.12
-      eslint: 8.25.0
-      eslint-config-next: 13.1.6
-      net: ^1.0.2
-      next: 13.1.6
-      postcss: ^8.4.18
-      react: 18.2.0
-      react-dom: 18.2.0
-      react-icons: ^4.7.1
-      tailwindcss: ^3.1.8
-      tls: ^0.0.1
-      typescript: 4.8.4
-      webbluetooth: ^2.2.0
-      ws: ^8.9.0
-    dependencies:
-      '@types/web-bluetooth': 0.0.16
-      net: 1.0.2
-      next: 13.1.6_biqbaboplfbrettd7655fr4n2y
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      react-icons: 4.7.1_react@18.2.0
-      tls: 0.0.1
-      webbluetooth: 2.2.0
-      ws: 8.9.0
-    devDependencies:
-      '@types/node': 18.11.1
-      '@types/react': 18.0.21
-      '@types/react-dom': 18.0.6
-      autoprefixer: 10.4.12_postcss@8.4.18
-      eslint: 8.25.0
-      eslint-config-next: 13.1.6_z4bbprzjrhnsfa24uvmcbu7f5q
-      postcss: 8.4.18
-      tailwindcss: 3.1.8_postcss@8.4.18
-      typescript: 4.8.4
+dependencies:
+  '@headlessui/react': 1.7.14_biqbaboplfbrettd7655fr4n2y
+  '@heroicons/react': 2.0.17_react@18.2.0
+  net: 1.0.2
+  next: 13.1.6_biqbaboplfbrettd7655fr4n2y
+  next-themes: 0.2.1_3vryta7zmbcsw4rrqf4axjqggm
+  react: 18.2.0
+  react-dom: 18.2.0_react@18.2.0
+  react-hook-form: 7.43.9_react@18.2.0
+  react-icons: 4.7.1_react@18.2.0
+  tls: 0.0.1
+  webbluetooth: 2.2.0
+  ws: 8.9.0
+
+devDependencies:
+  '@types/node': 18.11.1
+  '@types/react': 18.0.21
+  '@types/react-dom': 18.0.6
+  '@types/web-bluetooth': 0.0.16
+  autoprefixer: 10.4.12_postcss@8.4.18
+  eslint: 8.25.0
+  eslint-config-next: 13.1.6_z4bbprzjrhnsfa24uvmcbu7f5q
+  postcss: 8.4.18
+  tailwindcss: 3.1.8_postcss@8.4.18
+  typescript: 4.8.4
 
 packages:
 
@@ -99,6 +106,26 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@headlessui/react/1.7.14_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-znzdq9PG8rkwcu9oQ2FwIy0ZFtP9Z7ycS+BAqJ3R5EIqC/0bJGvhT7193rFf+45i9nnPsYvCQVW4V/bB9Xc+gA==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: ^16 || ^17 || ^18
+      react-dom: ^16 || ^17 || ^18
+    dependencies:
+      client-only: 0.0.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@heroicons/react/2.0.17_react@18.2.0:
+    resolution: {integrity: sha512-90GMZktkA53YbNzHp6asVEDevUQCMtxWH+2UK2S8OpnLEu7qckTJPhNxNQG52xIR1WFTwFqtH6bt7a60ZNcLLA==}
+    peerDependencies:
+      react: '>= 16'
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /@humanwhocodes/config-array/0.10.7:
     resolution: {integrity: sha512-MDl6D6sBsaV452/QSdX+4CXIjZhIcI0PELsxUjk4U828yd58vk3bTIvk/6w5FY+4hIy9sLW0sfrV7K7Kc++j/w==}
@@ -349,7 +376,7 @@ packages:
 
   /@types/web-bluetooth/0.0.16:
     resolution: {integrity: sha512-oh8q2Zc32S6gd/j50GowEjKLoOVOwHP/bWVjKJInBwQqdOYMdPrf1oVlelTlyfFK3CKxL1uahMDAr+vy8T7yMQ==}
-    dev: false
+    dev: true
 
   /@typescript-eslint/parser/5.52.0_z4bbprzjrhnsfa24uvmcbu7f5q:
     resolution: {integrity: sha512-e2KiLQOZRo4Y0D/b+3y08i3jsekoSkOYStROYmPUnGMEoA0h+k2qOH5H6tcjIc68WDvGwH+PaOrP1XRzLJ6QlA==}
@@ -1921,6 +1948,18 @@ packages:
     resolution: {integrity: sha512-kbhcj2SVVR4caaVnGLJKmlk2+f+oLkjqdKeQlmUtz6nGzOpbcobwVIeSURNgraV/v3tlmGIX82OcPCl0K6RbHQ==}
     dev: false
 
+  /next-themes/0.2.1_3vryta7zmbcsw4rrqf4axjqggm:
+    resolution: {integrity: sha512-B+AKNfYNIzh0vqQQKqQItTS8evEouKD7H5Hj3kmuPERwddR2TxvDSFZuTj6T7Jfn1oyeUyJMydPl1Bkxkh0W7A==}
+    peerDependencies:
+      next: '*'
+      react: '*'
+      react-dom: '*'
+    dependencies:
+      next: 13.1.6_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
   /next/13.1.6_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-hHlbhKPj9pW+Cymvfzc15lvhaOZ54l+8sXDXJWm3OBNBzgrVj6hwGPmqqsXg40xO1Leq+kXpllzRPuncpC0Phw==}
     engines: {node: '>=14.6.0'}
@@ -2293,6 +2332,15 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-hook-form/7.43.9_react@18.2.0:
+    resolution: {integrity: sha512-AUDN3Pz2NSeoxQ7Hs6OhQhDr6gtF9YRuutGDwPQqhSUAHJSgGl2VeY3qN19MG0SucpjgDiuMJ4iC5T5uB+eaNQ==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-icons/4.7.1_react@18.2.0:

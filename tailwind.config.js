@@ -1,21 +1,25 @@
-/** @type {import('tailwindcss').Config} */
+const defaultTheme = require("tailwindcss/defaultTheme");
+const colors = require("tailwindcss/colors");
+
 module.exports = {
+  mode: "jit",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: "class", // or 'media' or 'class'
   theme: {
     extend: {
       colors: {
-        primary: {
-          extralight: "#C1C8E4",
-          light: "#84CEEB",
-          DEFAULT: "#5AB9EA",
-          dark: "#5680E9",
-          extradark: "#8860D0",
-        },
+        trueGray: colors.neutral,
       },
     },
+    fontFamily: {
+      sans: ["Inter", ...defaultTheme.fontFamily.sans],
+      stock: [defaultTheme.fontFamily.sans],
+    },
   },
-  plugins: [],
+  variants: {
+    extend: {},
+  },
 };

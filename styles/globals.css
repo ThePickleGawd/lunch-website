@@ -2,11 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-.gradientcorner {
-  background: linear-gradient(
-    150deg,
-    #a88ed7 4%,
-    #a2b5da 6%,
-    rgba(255, 255, 255, 0) 16%
-  );
+@layer base {
+  html,
+  body {
+    @apply dark:bg-trueGray-900;
+  }
 }
