@@ -1,8 +1,25 @@
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import React from "react";
 import Container from "./Container";
 
-const Benefits = (props) => {
+interface BenefitProps {
+  title: string;
+  icon: any;
+  children?: React.ReactNode;
+}
+
+interface BenefitsProps {
+  imgPos: "right" | "left";
+  data: {
+    title: string;
+    imgPos: "right" | "left";
+    image: StaticImageData;
+    desc: string;
+    bullets: Array<BenefitProps & { desc: string }>;
+  };
+}
+
+const Benefits = (props: BenefitsProps) => {
   const { data } = props;
   return (
     <>
@@ -16,9 +33,8 @@ const Benefits = (props) => {
             <Image
               src={data.image}
               width="521"
-              height="auto"
               alt="Benefits"
-              className={"object-cover"}
+              className={"object-cover h-auto"}
               placeholder="blur"
               blurDataURL={data.image.src}
             />
@@ -55,7 +71,7 @@ const Benefits = (props) => {
   );
 };
 
-function Benefit(props) {
+function Benefit(props: BenefitProps) {
   return (
     <>
       <div className="flex items-start mt-8 space-x-3">
