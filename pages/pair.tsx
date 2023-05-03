@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import { useBtDevice } from "../hooks/useBtDevice";
-import { useSleep } from "../hooks/useSleep";
-import BLEIcon from "../public/ble.svg";
-import BLEHoverIcon from "../public/bleHover.svg";
+import { useBtDevice } from "@/hooks/useBtDevice";
+import { useSleep } from "@/hooks/useSleep";
+import BLEIcon from "@/public/ble.svg";
+import BLEHoverIcon from "@/public/bleHover.svg";
 
 enum PageState {
   LANDING,

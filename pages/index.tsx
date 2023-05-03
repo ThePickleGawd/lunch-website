@@ -1,21 +1,22 @@
 import Head from "next/head";
-import Hero from "../components/Hero";
-import Navbar from "../components/Navbar";
-import SectionTitle from "../components/SectionTitle";
+import Hero from "@/components/home/Hero";
+import Navbar from "@/components/layout/Navbar";
+import SectionTitle from "@/components/home/SectionTitle";
 
-import { benefitOne, benefitTwo } from "../components/Data";
-import Video from "../components/Video";
-import Benefits from "../components/Benefits";
-import Footer from "../components/Footer";
-import Testimonials from "../components/Testimonials";
-import Cta from "../components/CTA";
-import Faq from "../components/FAQ";
+import { benefitOne, benefitTwo } from "@/data/benefits";
+import Video from "@/components/home/Video";
+import Benefits from "@/components/home/Benefits";
+import Footer from "@/components/layout/Footer";
+import Testimonials from "@/components/home/Testimonials";
+import Cta from "@/components/home/CTA";
+import Faq from "@/components/home/FAQ";
+import { NextPage } from "next";
 
-const Home = () => {
+const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>LunchTrak - No More Waiting For Food</title>
+        <title>LunchTrak - Faster Lunch Lines</title>
         <meta
           name="description"
           content="LunchTrak helps you avoid long school lunch lines through automatic, wireless check-in."
@@ -48,10 +49,10 @@ const Home = () => {
         Use this section to highlight your popular customers.
       </SectionTitle>
       <Testimonials /> */}
-      <SectionTitle pretitle="FAQ" title="Frequently Asked Questions">
-        Answer your customers possible questions here, it will increase the
-        conversion rate as well as support or chat requests.
-      </SectionTitle>
+      <SectionTitle
+        pretitle="FAQ"
+        title="Frequently Asked Questions"
+      ></SectionTitle>
       <Faq />
       <Cta />
       <Footer />
