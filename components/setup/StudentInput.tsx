@@ -31,7 +31,7 @@ const StudentInput = ({ value, onChange, onSubmit }: StudentInputProps) => {
         onChange={onChange}
         onBlur={() => setError("")}
         value={value}
-        className={`w-full rounded-md border border-gray-400 bg-white px-3 py-2 text-4xl text-gray-600 placeholder-gray-300 focus:outline-none focus:ring dark:bg-gray-700 dark:text-white  ${
+        className={`w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-4xl text-gray-600 placeholder-gray-300 focus:outline-none focus:ring dark:bg-gray-700 dark:text-white  ${
           error !== ""
             ? "border-red-600 ring-red-100 focus:border-red-600"
             : "border-gray-300 ring-indigo-100 focus:border-indigo-600"
@@ -45,7 +45,7 @@ const StudentInput = ({ value, onChange, onSubmit }: StudentInputProps) => {
       )}
 
       <button
-        className="mt-4 w-full rounded-lg bg-emerald-500 px-4 py-2"
+        className="mt-4 w-full rounded-lg bg-emerald-600 px-4 py-2 font-bold text-white"
         onClick={handleSubmit}
       >
         Confirm

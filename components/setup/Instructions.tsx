@@ -21,8 +21,8 @@ const Instructions = ({ currentStep }: { currentStep: number }) => {
       image: "",
     },
     {
-      title: "Congrats! You're Done.",
-      description: "Enjoy getting your lunch faster",
+      title: "You're Almost Done",
+      description: "Verify your student ID and you're all set!",
       image: "",
     },
   ];

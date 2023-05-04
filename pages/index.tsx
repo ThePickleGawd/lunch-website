@@ -32,13 +32,10 @@ const Home: NextPage = () => {
       </SectionTitle>
       <Benefits data={benefitOne} />
       <Benefits imgPos="right" data={benefitTwo} />
-      <SectionTitle
-        pretitle="Watch a video"
-        title="Learn how to fullfil your needs"
-      >
-        This section is to highlight a promo or demo video of your product.
-        Analysts says a landing page with video has 3% more conversion rate. So,
-        don&apos;t forget to add one. Just like this.
+      <SectionTitle pretitle="Watch a video" title="See LunchTrak in Action">
+        Ok you got us... We haven&apos;t actually demoed our tech anywhere. See
+        it for yourself during the summer at Gunn High School. For now, watch
+        this totally awesome placeholder video.
       </SectionTitle>
       <Video />
       {/* <SectionTitle

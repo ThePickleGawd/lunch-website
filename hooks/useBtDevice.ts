@@ -111,6 +111,8 @@ export const useBtDevice = (): LunchTrakBluetoothDevice => {
         2,
         async (): Promise<BluetoothRemoteGATTServer | undefined> => {
           time(`Connecting to ${device.name}...`);
+          setIsConnected(false);
+
           let server = await device.gatt?.connect();
 
           if (!server) throw new Error("Could not connect to GATT Server");

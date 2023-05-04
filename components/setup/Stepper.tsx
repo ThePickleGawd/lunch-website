@@ -4,7 +4,7 @@ interface StepperProps {
 }
 
 const Stepper = ({ currentStep, setStep }: StepperProps) => {
-  const steps = ["Pair Tag", "Enter ID", "All Done!"];
+  const steps = ["Pair Tag", "Enter ID", "Verify"];
 
   return (
     <div className="flex w-full items-center justify-center space-x-2 rounded-lg p-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400 sm:space-x-4 sm:p-4 sm:text-base">

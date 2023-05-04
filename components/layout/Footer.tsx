@@ -9,7 +9,7 @@ const Footer = () => {
   return (
     <div className="relative">
       <Container>
-        <div className="grid max-w-screen-xl grid-cols-1 gap-10 pt-10 mx-auto mt-5 border-t border-gray-100 dark:border-trueGray-700 lg:grid-cols-5">
+        <div className="mx-auto mt-5 grid max-w-screen-xl grid-cols-1 gap-10 border-t border-gray-100 pt-10 dark:border-trueGray-700 lg:grid-cols-5">
           <div className="lg:col-span-2">
             <div>
               {" "}
@@ -28,20 +28,20 @@ const Footer = () => {
               </Link>
             </div>
 
-            <div className="max-w-md mt-4 text-gray-500 dark:text-gray-400">
-              Nextly is a free landing page & marketing website template for
-              startups and indie projects. Its built with Next.js & TailwindCSS.
-              And its completely open-source.
+            <div className="mt-4 max-w-md text-gray-500 dark:text-gray-400">
+              {
+                "LunchTrak LLC is a California-registered Limited Liability Corporation. We are not affiliated with any school or school district."
+              }
             </div>
           </div>
 
           <div>
-            <div className="flex flex-wrap w-full -mt-2 -ml-3 lg:ml-0">
+            <div className="-mt-2 -ml-3 flex w-full flex-wrap lg:ml-0">
               {navigation.map((item, index) => (
                 <Link
                   key={index}
                   href="/"
-                  className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-emerald-500 focus:text-emerald-500 focus:bg-emerald-100 focus:outline-none dark:focus:bg-trueGray-700"
+                  className="w-full rounded-md px-4 py-2 text-gray-500 hover:text-emerald-500 focus:bg-emerald-100 focus:text-emerald-500 focus:outline-none dark:text-gray-300 dark:focus:bg-trueGray-700"
                 >
                   {item}
                 </Link>
@@ -49,12 +49,12 @@ const Footer = () => {
             </div>
           </div>
           <div>
-            <div className="flex flex-wrap w-full -mt-2 -ml-3 lg:ml-0">
+            <div className="-mt-2 -ml-3 flex w-full flex-wrap lg:ml-0">
               {legal.map((item, index) => (
                 <Link
                   key={index}
                   href="/"
-                  className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-emerald-500 focus:text-emerald-500 focus:bg-emerald-100 focus:outline-none dark:focus:bg-trueGray-700"
+                  className="w-full rounded-md px-4 py-2 text-gray-500 hover:text-emerald-500 focus:bg-emerald-100 focus:text-emerald-500 focus:outline-none dark:text-gray-300 dark:focus:bg-trueGray-700"
                 >
                   {item}
                 </Link>
@@ -63,20 +63,20 @@ const Footer = () => {
           </div>
           <div className="">
             <div>Follow us</div>
-            <div className="flex mt-5 space-x-5 text-gray-400 dark:text-gray-500">
-              <a href="https://twitter.com/web3templates">
+            <div className="mt-5 flex space-x-5 text-gray-400 dark:text-gray-500">
+              <a href="">
                 <span className="sr-only">Twitter</span>
                 <Twitter />
               </a>
-              <a href="https://facebook.com/web3templates">
+              <a href="">
                 <span className="sr-only">Facebook</span>
                 <Facebook />
               </a>
-              <a href="https://instagram.com/web3templates">
+              <a href="">
                 <span className="sr-only">Instagram</span>
                 <Instagram />
               </a>
-              <a href="https://linkedin.com/">
+              <a href="https://www.linkedin.com/in/dylanelu/">
                 <span className="sr-only">Linkedin</span>
                 <Linkedin />
               </a>
@@ -84,7 +84,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="my-10 text-sm text-center text-gray-600 dark:text-gray-400">
+        <div className="my-10 text-center text-sm text-gray-600 dark:text-gray-400">
           Copyright © {new Date().getFullYear()}. LunchTrak LLC
         </div>
       </Container>

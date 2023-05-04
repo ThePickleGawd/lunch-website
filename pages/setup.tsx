@@ -4,6 +4,7 @@ import Instructions from "@/components/setup/Instructions";
 import LoadingCircle from "@/components/setup/LoadingCircle";
 import Stepper from "@/components/setup/Stepper";
 import StudentInput from "@/components/setup/StudentInput";
+import Unsupported from "@/components/setup/Unsupported";
 import { useBtDevice } from "@/hooks/useBtDevice";
 import { useSleep } from "@/hooks/useSleep";
 import { NextPage } from "next";
@@ -37,6 +38,10 @@ const Setup: NextPage = () => {
   } = useBtDevice();
   const { sleep } = useSleep();
 
+  useEffect(() => {
+    return () => {};
+  });
+
   const handleConnect = () => {
     // Connect then set lunch data
     setLoading(true);
@@ -44,6 +49,8 @@ const Setup: NextPage = () => {
       .then(() => {
         setLoading(false);
         setSetupState(SetupState.ENTER_ID);
+
+        sleep().then(refreshLunchData);
       })
       .catch((e) => {
         console.log(e);
@@ -54,12 +61,19 @@ const Setup: NextPage = () => {
   const handleWriteStudentID = async () => {
     setLoading(true);
 
-    const success = await writeStudentID(studentIDInput);
-    if (success) {
-      await sleep();
-      await refreshLunchData();
-    } else {
+    try {
+      const success = await writeStudentID(studentIDInput);
+      if (success) {
+        await sleep();
+        await refreshLunchData();
+
+        setSetupState(SetupState.DONE);
+      } else {
+        setWriteError("Failed. Please try again or contact support");
+      }
+    } catch (e) {
       setWriteError("Failed. Please try again or contact support");
+      console.error(e);
     }
 
     setLoading(false);
@@ -73,6 +87,7 @@ const Setup: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {loading && <LoadingCircle />}
+      {true && <Unsupported />}
       <Navbar />
       <Container className="flex h-full w-full items-center justify-center">
         <div className="w-[30rem]">
@@ -96,13 +111,15 @@ const Setup: NextPage = () => {
                 <div className="w-64 py-4">
                   {isConnected ? (
                     <>
-                    <StudentInput
-                      onChange={(e) => setStudentIDInput(e.target.value)}
-                      value={studentIDInput}
-                      onSubmit={handleWriteStudentID}
+                      <StudentInput
+                        onChange={(e) => setStudentIDInput(e.target.value)}
+                        value={studentIDInput}
+                        onSubmit={handleWriteStudentID}
                       />
-                      {writeError && <div className="text-red-500">{writeError}</div>}
-                      </>
+                      {writeError !== "" && (
+                        <div className="mt-2 text-red-400">{writeError}</div>
+                      )}
+                    </>
                   ) : (
                     <div className="flex flex-col items-center space-y-4">
                       <div className="text-center text-2xl text-gray-500 dark:text-gray-400">
@@ -116,6 +133,18 @@ const Setup: NextPage = () => {
                       </button>
                     </div>
                   )}
+                </div>
+              </div>
+            )}
+
+            {/* Step Three: Verify */}
+            {setupState === SetupState.DONE && (
+              <div className="flex w-full flex-col items-center space-y-2 px-6">
+                <div className="font-semi-bold w-full rounded-lg bg-gray-300 px-4 py-2 text-center text-3xl text-gray-700 dark:bg-trueGray-700 dark:text-white">
+                  {studentID}
+                </div>
+                <div className="font-semi-bold w-full rounded-lg bg-gray-300 px-4 py-2 text-center text-3xl text-gray-700 dark:bg-trueGray-700 dark:text-white">
+                  {schoolID}
                 </div>
               </div>
             )}
