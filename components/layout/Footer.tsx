@@ -76,7 +76,7 @@ const Footer = () => {
                 <span className="sr-only">Instagram</span>
                 <Instagram />
               </a>
-              <a href="https://www.linkedin.com/in/dylanelu/">
+              <a href="">
                 <span className="sr-only">Linkedin</span>
                 <Linkedin />
               </a>

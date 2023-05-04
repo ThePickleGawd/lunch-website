@@ -17,8 +17,8 @@ const benefitOne = {
   image: benefitOneImg,
   bullets: [
     {
-      title: "Save up to 5 minutes a day",
-      desc: "That's 15 hours a year! We know you'd rather spend that time with your friends instead.",
+      title: "Save valuable lunch time everyday",
+      desc: "Who doesn't want more time to hang out with their friends?",
       icon: <FaceSmileIcon />,
     },
     {
@@ -41,7 +41,7 @@ const benefitTwo = {
   bullets: [
     {
       title: "Less stress for cashiers",
-      desc: "Cashiers can focus solely on CDE meal requirements instead of constantly juggling barcode scanners and keypads",
+      desc: "Cashiers can put more focus on CDE meal requirements instead of constantly juggling barcode scanners and keypads",
       icon: <DevicePhoneMobileIcon />,
     },
     {
@@ -50,8 +50,8 @@ const benefitTwo = {
       icon: <AdjustmentsHorizontalIcon />,
     },
     {
-      title: "Better mental health",
-      desc: "As stressful as school can be, lunch time gives students a time to bond and explore their passions. More lunch time means better wellness for students.",
+      title: "Better mental health for students",
+      desc: "As stressful as it can be, schools give students the opportunity to socialize and explore their passions during lunch. Give your students more of that.",
       icon: <SunIcon />,
     },
   ],

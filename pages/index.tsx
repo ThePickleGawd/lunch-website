@@ -33,9 +33,8 @@ const Home: NextPage = () => {
       <Benefits data={benefitOne} />
       <Benefits imgPos="right" data={benefitTwo} />
       <SectionTitle pretitle="Watch a video" title="See LunchTrak in Action">
-        Ok you got us... We haven&apos;t actually demoed our tech anywhere. See
-        it for yourself during the summer at Gunn High School. For now, watch
-        this totally awesome placeholder video.
+        Ok you got us... We haven&apos;t actually demoed our tech anywhere. For
+        now, watch this totally awesome placeholder video.
       </SectionTitle>
       <Video />
       {/* <SectionTitle
