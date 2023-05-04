@@ -14,7 +14,6 @@ const Hero = () => {
             </h1>
             <p className="py-5 text-xl leading-normal text-gray-500 dark:text-gray-300 lg:text-xl xl:text-2xl">
               Stop holding back the line with slow keypads and barcode scanners.
-              Get your students checked in automatically with LunchTrak.
             </p>
 
             <div className="flex flex-col items-start space-y-3 sm:flex-row sm:items-center sm:space-x-4 sm:space-y-0">
@@ -22,7 +21,7 @@ const Hero = () => {
                 href="/"
                 className="rounded-md bg-emerald-600 px-8 py-4 text-center text-lg font-medium text-white "
               >
-                See a Demo
+                See How
               </Link>
               {/* <a
                 href="https://github.com/web3templates/nextly-template/"

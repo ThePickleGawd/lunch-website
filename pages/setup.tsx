@@ -87,7 +87,6 @@ const Setup: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {loading && <LoadingCircle />}
-      {true && <Unsupported />}
       <Navbar />
       <Container className="flex h-full w-full items-center justify-center">
         <div className="w-[30rem]">
@@ -97,12 +96,18 @@ const Setup: NextPage = () => {
 
             {/* Step One: Pair tag*/}
             {setupState === SetupState.PAIR_TAG && (
-              <button
-                className="text-md rounded-lg bg-gradient-to-br from-emerald-400 to-blue-400 px-6 py-4 font-semibold text-white shadow-lg hover:bg-gradient-to-r hover:from-indigo-500 hover:to-blue-500"
-                onClick={handleConnect}
-              >
-                Pair Your Tag
-              </button>
+              <>
+                {supportsBluetooth ? (
+                  <button
+                    className="text-md rounded-lg bg-gradient-to-br from-emerald-400 to-blue-400 px-6 py-4 font-semibold text-white shadow-lg hover:bg-gradient-to-r hover:from-indigo-500 hover:to-blue-500"
+                    onClick={handleConnect}
+                  >
+                    Pair Your Tag
+                  </button>
+                ) : (
+                  <Unsupported />
+                )}
+              </>
             )}
 
             {/* Step Two: Type Student ID */}
