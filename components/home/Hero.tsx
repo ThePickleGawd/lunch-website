@@ -7,23 +7,22 @@ const Hero = () => {
   return (
     <>
       <Container className="flex flex-wrap ">
-        <div className="flex items-center w-full lg:w-1/2">
-          <div className="max-w-2xl mb-8">
-            <h1 className="text-4xl font-bold leading-snug tracking-tight text-gray-800 lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight dark:text-white">
-              10x Faster School Lunch Lines
+        <div className="flex w-full items-center lg:w-1/2">
+          <div className="mb-8 max-w-2xl">
+            <h1 className="text-4xl font-bold leading-snug tracking-tight text-gray-800 dark:text-white lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight">
+              Make Your Lunch Line 10x Faster
             </h1>
-            <p className="py-5 text-xl leading-normal text-gray-500 lg:text-xl xl:text-2xl dark:text-gray-300">
-              LunchTrak automatically checks in students as they walk through
-              the exit. That means no more stopping to type/scan students ID
-              numbers.
+            <p className="py-5 text-xl leading-normal text-gray-500 dark:text-gray-300 lg:text-xl xl:text-2xl">
+              Stop holding back the line with slow keypads and barcode scanners.
+              Get your students checked in automatically with LunchTrak.
             </p>
 
-            <div className="flex flex-col items-start space-y-3 sm:space-x-4 sm:space-y-0 sm:items-center sm:flex-row">
+            <div className="flex flex-col items-start space-y-3 sm:flex-row sm:items-center sm:space-x-4 sm:space-y-0">
               <Link
                 href="/"
-                className="px-8 py-4 text-lg font-medium text-center text-white bg-emerald-600 rounded-md "
+                className="rounded-md bg-emerald-600 px-8 py-4 text-center text-lg font-medium text-white "
               >
-                Start Applying Now
+                See a Demo
               </Link>
               {/* <a
                 href="https://github.com/web3templates/nextly-template/"
@@ -46,7 +45,7 @@ const Hero = () => {
             </div>
           </div>
         </div>
-        <div className="flex items-center justify-center w-full lg:w-1/2">
+        <div className="flex w-full items-center justify-center lg:w-1/2">
           <div className="">
             <Image
               src={heroImg}

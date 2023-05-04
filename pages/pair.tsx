@@ -46,7 +46,7 @@ const Pair: NextPage = () => {
   const refreshLunchData = async () => {
     console.log("refreshing lunch data...");
     const schoolID_val = await readSchoolID();
-    await sleep(500);
+    await sleep();
     const studentID_val = await readStudentID();
 
     setSchoolID(schoolID_val);
@@ -71,7 +71,7 @@ const Pair: NextPage = () => {
 
     const success = await writeStudentID(text);
 
-    await sleep(500);
+    await sleep();
     await refreshLunchData();
 
     setSuccessWriteData(success);
@@ -94,11 +94,11 @@ const Pair: NextPage = () => {
       {loading && (
         <div
           role="status"
-          className="fixed w-full h-full bg-gray-800 flex items-center justify-center opacity-30"
+          className="fixed flex h-full w-full items-center justify-center bg-gray-800 opacity-30"
         >
           <svg
             aria-hidden="true"
-            className="mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+            className="mr-2 h-8 w-8 animate-spin fill-blue-600 text-gray-200 dark:text-gray-600"
             viewBox="0 0 100 101"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -116,8 +116,8 @@ const Pair: NextPage = () => {
         </div>
       )}
       {!supportsBluetooth && (
-        <div className="w-full h-full flex justify-center items-center">
-          <div className="m-10 text-lg text-center">
+        <div className="flex h-full w-full items-center justify-center">
+          <div className="m-10 text-center text-lg">
             Sorry, this browser does not support bluetooth. Use <b>Chrome</b> or{" "}
             <b>Edge</b> on a laptop or an android device instead
             <br />
@@ -142,31 +142,31 @@ const Pair: NextPage = () => {
         </div>
       )}
       {isConnected && (
-        <div className="fixed right-0 p-10 bottom-0 z-10">
+        <div className="fixed right-0 bottom-0 z-10 p-10">
           <div
-            className={`bg-gradient-to-r from-gray-300 to-white p-2 rounded-lg w-full h-full flex group ${
+            className={`group flex h-full w-full rounded-lg bg-gradient-to-r from-gray-300 to-white p-2 ${
               showConfirmation ? "p-5" : "hover:p-5"
-            } transition-all ease-in-out duration-100`}
+            } transition-all duration-100 ease-in-out`}
           >
             <div
               className={`${
                 showConfirmation ? "flex" : "hidden"
-              } group-hover:flex px-3 md:px-10 text-black flex-col justify-center items-center`}
+              } flex-col items-center justify-center px-3 text-black group-hover:flex md:px-10`}
             >
-              <div className="text-xl text-left">Device Data</div>
-              <div className="text-md md:text-lg text-left">
+              <div className="text-left text-xl">Device Data</div>
+              <div className="text-md text-left md:text-lg">
                 School ID: {schoolID}
               </div>
-              <div className="text-md md:text-lg text-left">
+              <div className="text-md text-left md:text-lg">
                 Student ID: {studentID}
               </div>
             </div>
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col items-center justify-center">
               <div
                 className={`${showConfirmation && "hidden"} group-hover:hidden`}
               >
                 <Image width={80} height={80} src={BLEIcon} alt="connected" />
-                <div className="text-black text-md">Connected</div>
+                <div className="text-md text-black">Connected</div>
               </div>
               <div
                 className={`${
@@ -179,27 +179,27 @@ const Pair: NextPage = () => {
                   src={BLEHoverIcon}
                   alt="connected"
                 />
-                <div className="text-blue-500 font-bold text-md">Connected</div>
+                <div className="text-md font-bold text-blue-500">Connected</div>
               </div>
             </div>
             <div></div>
           </div>
         </div>
       )}
-      <div className="fixed top-0 w-full flex flex-col items-center justify-center space-y-3">
-        <div className="text-5xl font-bold pt-10 bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">
+      <div className="fixed top-0 flex w-full flex-col items-center justify-center space-y-3">
+        <div className="bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text pt-10 text-5xl font-bold text-transparent">
           LunchTrak
         </div>
-        <div className="text-lg bg-gradient-to-r from-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
+        <div className="bg-gradient-to-r from-violet-500 to-fuchsia-500 bg-clip-text text-lg text-transparent">
           No more waiting for your food
         </div>
       </div>
-      <div className="h-full flex flex-col items-center justify-center space-y-5">
+      <div className="flex h-full flex-col items-center justify-center space-y-5">
         {pageState == PageState.LANDING && (
           <>
             <div className="">
               <button
-                className="bg-gradient-to-r from-blue-900 to-violet-500 hover:from-fuchsia-600 hover:to-pink-500 text-white font-bold py-2 px-4 rounded-full"
+                className="rounded-full bg-gradient-to-r from-blue-900 to-violet-500 py-2 px-4 font-bold text-white hover:from-fuchsia-600 hover:to-pink-500"
                 onClick={handleConnect}
               >
                 Connect to Device
@@ -213,7 +213,7 @@ const Pair: NextPage = () => {
             <div className="w-64">
               <input
                 type="text"
-                className="w-full h-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="block h-full w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                 placeholder="Please enter your student ID"
                 required
                 value={text}
@@ -225,13 +225,13 @@ const Pair: NextPage = () => {
                 <div
                   className={`${
                     successWriteData ? "text-green-500" : "text-red-500"
-                  } font-bold py-2 px-4`}
+                  } py-2 px-4 font-bold`}
                 >
                   {successWriteData ? "Success!" : "Failed"}
                 </div>
               ) : (
                 <button
-                  className="hover:bg-gray-900 text-white font-bold py-2 px-4 rounded-lg"
+                  className="rounded-lg py-2 px-4 font-bold text-white hover:bg-gray-900"
                   onClick={handleWriteData}
                 >
                   Confirm
