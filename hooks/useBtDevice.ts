@@ -1,4 +1,4 @@
-/* https://www.bekk.christmas/post/2021/12/web-bluetooth */
+/* Loosely based off https://www.bekk.christmas/post/2021/12/web-bluetooth */
 
 import * as React from "react";
 import { BluetoothRemoteGATTCharacteristic } from "webbluetooth/dist/characteristic";
@@ -6,21 +6,24 @@ import { useSleep } from "./useSleep";
 
 type Characteristic = BluetoothRemoteGATTCharacteristic | undefined;
 
-export interface BtDevice {
+export interface LunchTrakBluetoothDevice {
   supportsBluetooth: boolean;
   isConnected: boolean;
+  studentID: string;
+  schoolID: string;
   pairDevice: () => Promise<void>;
+  refreshLunchData: () => Promise<void>;
   writeStudentID: (text: string) => Promise<boolean>;
   writeSchoolID: (text: string) => Promise<boolean>;
-  readSchoolID: () => Promise<string>;
-  readStudentID: () => Promise<string>;
 }
 
-export const useBtDevice = (): BtDevice => {
+export const useBtDevice = (): LunchTrakBluetoothDevice => {
   const [isConnected, setIsConnected] = React.useState(false);
+  const [supportsBluetooth, setSupportsBluetooth] = React.useState(true);
   const [schoolIDChar, setSchoolIDChar] = React.useState<Characteristic>();
   const [studentIDChar, setStudentIDChar] = React.useState<Characteristic>();
-  const [supportsBluetooth, setSupportsBluetooth] = React.useState(true);
+  const [studentID, setStudentID] = React.useState("");
+  const [schoolID, setSchoolID] = React.useState("");
 
   const { sleep } = useSleep();
 
@@ -37,6 +40,7 @@ export const useBtDevice = (): BtDevice => {
 
   const pairDevice = async () => {
     const options = {
+      // Lunch GATT Service UUID
       filters: [{ services: ["11435b92-3653-4ab9-8c50-399456922854"] }],
     };
 
@@ -53,13 +57,18 @@ export const useBtDevice = (): BtDevice => {
     const server = await connect(device);
   };
 
+  const refreshLunchData = async () => {
+    setStudentID(await readStudentID());
+    setSchoolID(await readSchoolID());
+  };
+
   const writeSchoolID = async (text: string) => {
     var enc = new TextEncoder();
     schoolIDChar?.writeValue(enc.encode(text)).catch((err) => {
       console.log(err);
     });
 
-    await sleep(500);
+    await sleep();
 
     // Successful if the value we want to write is the same as the value we read
     return text === (await readSchoolID());
@@ -71,7 +80,7 @@ export const useBtDevice = (): BtDevice => {
       console.log(err);
     });
 
-    await sleep(500);
+    await sleep();
 
     // Successful if the value we want to write is the same as the value we read
     return text === (await readStudentID());
@@ -98,10 +107,12 @@ export const useBtDevice = (): BtDevice => {
   ): Promise<BluetoothRemoteGATTServer | null> => {
     try {
       const server = await exponentialBackoff(
-        4,
+        3,
         2,
         async (): Promise<BluetoothRemoteGATTServer | undefined> => {
           time(`Connecting to ${device.name}...`);
+          setIsConnected(false);
+
           let server = await device.gatt?.connect();
 
           if (!server) throw new Error("Could not connect to GATT Server");
@@ -171,10 +182,11 @@ export const useBtDevice = (): BtDevice => {
   return {
     supportsBluetooth,
     isConnected,
+    studentID,
+    schoolID,
     pairDevice,
     writeStudentID,
     writeSchoolID,
-    readStudentID,
-    readSchoolID,
+    refreshLunchData,
   };
 };
