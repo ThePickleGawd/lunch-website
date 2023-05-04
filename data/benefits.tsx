@@ -11,8 +11,8 @@ import benefitOneImg from "@/public/img/benefit-one.png";
 import benefitTwoImg from "@/public/img/benefit-two.png";
 
 const benefitOne = {
-  title: "Highlight your benefits",
-  desc: "You can use this space to highlight your first benefit or a feature of your product. It can also contain an image or Illustration like in the example along with some bullet points.",
+  title: "Faster Lunch Lines",
+  desc: "No one likes lines. In a single school year, students waste up to 24 hours standing in the lunch line",
   image: benefitOneImg,
   bullets: [
     {
@@ -34,8 +34,8 @@ const benefitOne = {
 };
 
 const benefitTwo = {
-  title: "Offer more benefits here",
-  desc: "You can use this same layout with a flip image to highlight your rest of the benefits of your product. It can also contain an image or Illustration as above section along with some bullet points.",
+  title: "Healthier and More Productive Students",
+  desc: "The CDE claims that giving students more lunch time is a proven stragety to help improve their academic potential and health. Stop holding back your students' potential with long lunch lines.",
   image: benefitTwoImg,
   bullets: [
     {
