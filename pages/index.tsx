@@ -11,18 +11,11 @@ import Testimonials from "@/components/home/Testimonials";
 import Cta from "@/components/home/CTA";
 import Faq from "@/components/home/FAQ";
 import { NextPage } from "next";
+import Metadata from "@/components/layout/Metadata";
 
 const Home: NextPage = () => {
   return (
     <>
-      <Head>
-        <title>LunchTrak - Faster Lunch Lines</title>
-        <meta
-          name="description"
-          content="LunchTrak helps you avoid long school lunch lines through automatic, wireless check-in."
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <Navbar />
       <Hero />
       <SectionTitle pretitle="LunchTrak Benefits" title="Why use LunchTrak?">
