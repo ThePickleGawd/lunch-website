@@ -4,7 +4,7 @@ import { Disclosure } from "@headlessui/react";
 import ThemeChanger from "@/components/home/DarkSwitch";
 
 const Navbar = () => {
-  //const navigation = ["Product", "Pricing", "Company", "Blog"];
+  // const navigation = ["Product", "Pricing", "Company"];
   const navigation: string[] = [];
 
   return (
@@ -66,7 +66,7 @@ const Navbar = () => {
                     {navigation.map((item, index) => (
                       <Link
                         key={index}
-                        href={`/${item}`}
+                        href={`/${item.toLowerCase()}`}
                         className="-ml-4 w-full rounded-md px-4 py-2 text-gray-500 hover:text-emerald-500 focus:bg-emerald-100 focus:text-emerald-500 focus:outline-none dark:text-gray-300 dark:focus:bg-gray-800"
                       >
                         {item}
@@ -88,13 +88,13 @@ const Navbar = () => {
         {/* menu  */}
         <div className="hidden text-center lg:flex lg:items-center">
           <ul className="flex-1 list-none items-center justify-end pt-6 lg:flex lg:pt-0">
-            {navigation.map((menu, index) => (
+            {navigation.map((item, index) => (
               <li className="nav__item mr-3" key={index}>
                 <Link
-                  href="/"
+                  href={`/${item.toLowerCase()}`}
                   className="inline-block rounded-md px-4 py-2 text-lg font-normal text-gray-800 no-underline hover:text-emerald-500 focus:bg-emerald-100 focus:text-emerald-500 focus:outline-none dark:text-gray-200 dark:focus:bg-gray-800"
                 >
-                  {menu}
+                  {item}
                 </Link>
               </li>
             ))}

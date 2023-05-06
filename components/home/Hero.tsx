@@ -18,7 +18,7 @@ const Hero = () => {
 
             <div className="flex flex-col items-start space-y-3 sm:flex-row sm:items-center sm:space-x-4 sm:space-y-0">
               <Link
-                href="/"
+                href="/product"
                 className="rounded-md bg-emerald-600 px-8 py-4 text-center text-lg font-medium text-white "
               >
                 See How
