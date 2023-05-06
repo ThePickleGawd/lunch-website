@@ -4,7 +4,7 @@ import React from "react";
 import Container from "./Container";
 
 const Footer = () => {
-  const navigation = ["Product", "Features", "Pricing", "Company", "Blog"];
+  const navigation = ["Product", "Pricing", "Company"];
   const legal = ["Terms", "Privacy", "Legal"];
   return (
     <div className="relative">
@@ -40,7 +40,7 @@ const Footer = () => {
               {navigation.map((item, index) => (
                 <Link
                   key={index}
-                  href="/"
+                  href={`/${item.toLowerCase()}`}
                   className="w-full rounded-md px-4 py-2 text-gray-500 hover:text-emerald-500 focus:bg-emerald-100 focus:text-emerald-500 focus:outline-none dark:text-gray-300 dark:focus:bg-trueGray-700"
                 >
                   {item}
