@@ -82,9 +82,12 @@ const Setup: NextPage = () => {
   return (
     <>
       <Head>
-        <title>LunchTrak - Setup</title>
-        <meta name="description" content="Setup your LunchTrak tags here." />
-        <link rel="icon" href="/favicon.ico" />
+        <title>LunchTrak: Setup LunchTrak Tags By Entering Student ID</title>
+        <meta
+          name="description"
+          content="Setup LunchTrak tags by entering your student ID. This is necessary for your device to be valid in the lunch line. Please only use the ID assigned to you."
+        />
+        <link rel="icon" href="/img/favicon.ico" />
       </Head>
       {loading && <LoadingCircle />}
       <Navbar />

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Container from "@/components/layout/Container";
-import heroImg from "@/public/img/LunchTrakHero.png";
+import heroImg from "@/public/img/lunchtrak/LunchTrakHero.png";
 import Link from "next/link";
 
 const Hero = () => {
