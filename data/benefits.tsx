@@ -8,7 +8,7 @@ import {
   CreditCardIcon,
 } from "@heroicons/react/24/solid";
 
-import benefitOneImg from "@/public/img/benefit/benefit-one.png";
+import benefitOneImg from "@/public/img/benefit/fried-chicken.png";
 import benefitTwoImg from "@/public/img/benefit/benefit-two.png";
 
 const benefitOne = {

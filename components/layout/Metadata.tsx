@@ -24,7 +24,7 @@ const Metadata = () => {
       />
       <meta
         property="og:image"
-        content="https://www.lunchtrak.com/img/LunchTrakHero.png"
+        content="https://www.lunchtrak.com/img/lunchtrak/LunchTrakGraphic.png"
       />
       <meta property="og:url" content="https://www.lunchtrak.com" />
       <meta property="og:type" content="website" />
