@@ -1,6 +1,10 @@
+import Image from "next/image";
+
 import Container from "@/components/layout/Container";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
+
+import LunchTrakTag from "@/public/img/lunchtrak/LunchTrakTag.png";
 
 const Pricing = () => {
   const prices = {
@@ -43,25 +47,26 @@ const Pricing = () => {
                   </div>
                 </div>
               </div>
+
               <ul
                 role="list"
                 className="m-auto w-max space-y-4 py-6 text-gray-600 dark:text-gray-200"
               >
                 <li className="space-x-2">
                   <span className="font-semibold text-emerald-500">
-                    &check;
+                    &#10003;
                   </span>
                   <span>First premium advantage</span>
                 </li>
                 <li className="space-x-2">
                   <span className="font-semibold text-emerald-500">
-                    &check;
+                    &#10003;
                   </span>
                   <span>Second advantage weekly</span>
                 </li>
                 <li className="space-x-2">
                   <span className="font-semibold text-emerald-500">
-                    &check;
+                    &#10003;
                   </span>
                   <span>Third advantage donate to project</span>
                 </li>
@@ -82,7 +87,7 @@ const Pricing = () => {
           <div className="group relative md:w-6/12 lg:w-7/12">
             <div
               aria-hidden="true"
-              className="absolute top-0 h-full w-full rounded-2xl bg-white shadow-lg transition duration-500 dark:bg-trueGray-800"
+              className="absolute top-0 h-full w-full rounded-2xl bg-white shadow-lg dark:bg-trueGray-800"
             ></div>
             <div className="relative p-6 pt-16 md:rounded-r-2xl md:p-8 md:pl-12 lg:p-16 lg:pl-20">
               <ul
@@ -91,25 +96,25 @@ const Pricing = () => {
               >
                 <li className="space-x-2">
                   <span className="font-semibold text-emerald-500">
-                    &check;
+                    &#10003;
                   </span>
                   <span>First premium advantage</span>
                 </li>
                 <li className="space-x-2">
                   <span className="font-semibold text-emerald-500">
-                    &check;
+                    &#10003;
                   </span>
                   <span>Second advantage weekly</span>
                 </li>
                 <li className="space-x-2">
                   <span className="font-semibold text-emerald-500">
-                    &check;
+                    &#10003;
                   </span>
                   <span>Third advantage donate to project</span>
                 </li>
                 <li className="space-x-2">
                   <span className="font-semibold text-emerald-500">
-                    &check;
+                    &#10003;
                   </span>
                   <span>Fourth, access to all components weekly</span>
                 </li>
