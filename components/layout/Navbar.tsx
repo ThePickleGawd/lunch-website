@@ -4,8 +4,8 @@ import { Disclosure } from "@headlessui/react";
 import ThemeChanger from "@/components/home/DarkSwitch";
 
 const Navbar = () => {
-  // const navigation = ["Product", "Pricing", "Company"];
-  const navigation: string[] = [];
+  const navigation = ["Product", "Pricing", "Company"];
+  // const navigation: string[] = [];
 
   return (
     <div className="w-full">
