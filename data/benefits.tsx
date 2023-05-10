@@ -13,7 +13,7 @@ import benefitTwoImg from "@/public/img/benefit/benefit-two.png";
 
 const benefitOne = {
   title: "For Students: Faster Lunch Lines",
-  desc: "No one likes lines. Get out of the crowded cafeteria and make the most of your precious lunch time.",
+  desc: "We all hate long linse. Use LunchTrak to quickly get out of the cafeteria and make the most of your precious lunch time.",
   image: benefitOneImg,
   bullets: [
     {
@@ -36,7 +36,7 @@ const benefitOne = {
 
 const benefitTwo = {
   title: "For Administrators: Healthier and More Productive Students",
-  desc: "The CDE claims that giving students more lunch time is a proven stragety to help improve their academic potential and health. Stop holding back your students' potential with long lunch lines.",
+  desc: "The CDE says that giving students more lunch time is a proven stragety to help improve their academic potential and health. Stop holding back your students' potential with long lunch lines.",
   image: benefitTwoImg,
   bullets: [
     {
@@ -50,8 +50,8 @@ const benefitTwo = {
       icon: <AdjustmentsHorizontalIcon />,
     },
     {
-      title: "Better mental health for students",
-      desc: "As stressful as it can be, schools give students the opportunity to socialize and explore their passions during lunch. Give your students more of that.",
+      title: "Better wellbeing for students",
+      desc: "Lunch is an important time to socialize and explore passions. Give your students more of this time.",
       icon: <SunIcon />,
     },
   ],
