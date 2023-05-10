@@ -8,8 +8,8 @@ import {
   CreditCardIcon,
 } from "@heroicons/react/24/solid";
 
-import benefitOneImg from "@/public/img/benefit/fried-chicken.png";
-import benefitTwoImg from "@/public/img/benefit/benefit-two.png";
+import benefitOneImg from "@/public/img/benefit/tacos.jpg";
+import benefitTwoImg from "@/public/img/benefit/healthy2.jpg";
 
 const benefitOne = {
   title: "For Students: Faster Lunch Lines",
@@ -51,7 +51,7 @@ const benefitTwo = {
     },
     {
       title: "Better wellbeing for students",
-      desc: "Lunch is an important time to socialize and explore passions. Give your students more of this time.",
+      desc: "Lunch is an important time to socialize and explore passions. Let your students make the most of it.",
       icon: <SunIcon />,
     },
   ],

@@ -11,7 +11,7 @@ const Metadata = () => {
         name="description"
         content="Save valuable lunch time and get to your clubs early with our LunchTrak's automatic check in technology. Our innovative product streamlines the lunch line process through wireless tags, making lines faster and more convenient for students and staff."
       />
-      <link rel="icon" href="/favicon.ico" />
+      <link rel="icon" href="/img/favicon.ico" />
       <meta charSet="UTF-8" />
       <meta name="author" content="LunchTrak LLC" />
       <meta name="robots" content="index, follow" />
