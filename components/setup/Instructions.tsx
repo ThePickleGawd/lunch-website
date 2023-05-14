@@ -1,4 +1,5 @@
 import Image, { StaticImageData } from "next/image";
+import LunchTrakPair from "@/public/img/setup/LunchTrakPair.png";
 
 interface InstructionsType {
   title: string;
@@ -13,7 +14,7 @@ const Instructions = ({ currentStep }: { currentStep: number }) => {
       title: "Pair Your LunchTrak Tag",
       description:
         "Remove the lid and hold the PAIR button for 3 seconds (it is the bottom one)",
-      image: "/img/setup/LunchTrakPair.png",
+      image: LunchTrakPair,
     },
     {
       title: "Enter Student ID",
@@ -21,7 +22,7 @@ const Instructions = ({ currentStep }: { currentStep: number }) => {
       image: "",
     },
     {
-      title: "You're Almost Done",
+      title: "Is the ID correct?",
       description: "Verify your student ID and you're all set!",
       image: "",
     },

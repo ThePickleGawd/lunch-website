@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, ChangeEventHandler, FormEvent, useState } from "react";
 
 interface StudentInputProps {
   value: string;
@@ -9,14 +9,21 @@ interface StudentInputProps {
 const StudentInput = ({ value, onChange, onSubmit }: StudentInputProps) => {
   const [error, setError] = useState("");
 
-  const handleSubmit = () => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length > 8) return;
+    onChange(e);
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+
     if (!value.startsWith("950") || value.length != 8) {
       setError("Invalid Student ID. Please Check");
     } else onSubmit();
   };
 
   return (
-    <>
+    <form onSubmit={handleSubmit}>
       <label
         htmlFor="text"
         className="mb-2 block text-sm text-gray-600 dark:text-gray-400"
@@ -28,7 +35,7 @@ const StudentInput = ({ value, onChange, onSubmit }: StudentInputProps) => {
         id="text"
         placeholder="950XXXXX"
         autoComplete="off"
-        onChange={onChange}
+        onChange={handleChange}
         onBlur={() => setError("")}
         value={value}
         className={`w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-4xl text-gray-600 placeholder-gray-300 focus:outline-none focus:ring dark:bg-gray-700 dark:text-white  ${
@@ -50,7 +57,7 @@ const StudentInput = ({ value, onChange, onSubmit }: StudentInputProps) => {
       >
         Confirm
       </button>
-    </>
+    </form>
   );
 };
 
