@@ -1,10 +1,13 @@
 import Image, { StaticImageData } from "next/image";
 import LunchTrakPair from "@/public/img/setup/LunchTrakPair.png";
+import WebBluetoothPair from "@/public/img/setup/WebBluetoothPair.png";
+
+import ImageSlides from "./ImageSlides";
 
 interface InstructionsType {
   title: string;
   description: string;
-  image: string | StaticImageData;
+  images: StaticImageData[];
 }
 
 const Instructions = ({ currentStep }: { currentStep: number }) => {
@@ -14,17 +17,17 @@ const Instructions = ({ currentStep }: { currentStep: number }) => {
       title: "Pair Your LunchTrak Tag",
       description:
         "Remove the lid and hold the PAIR button for 3 seconds (it is the bottom one)",
-      image: LunchTrakPair,
+      images: [LunchTrakPair, WebBluetoothPair],
     },
     {
       title: "Enter Student ID",
       description: "",
-      image: "",
+      images: [],
     },
     {
       title: "Is the ID correct?",
       description: "Verify your student ID and you're all set!",
-      image: "",
+      images: [],
     },
   ];
 
@@ -38,14 +41,8 @@ const Instructions = ({ currentStep }: { currentStep: number }) => {
           <div className="break-words text-center text-lg">
             {instructions[currentStep].description}
           </div>
-          {instructions[currentStep].image && (
-            <Image
-              src={instructions[currentStep].image}
-              alt=""
-              width={300}
-              height={300}
-              className="m-8"
-            />
+          {instructions[currentStep].images.length > 0 && (
+            <ImageSlides images={instructions[currentStep].images} />
           )}
         </div>
       </div>

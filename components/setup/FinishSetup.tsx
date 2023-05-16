@@ -28,7 +28,7 @@ const FinishSetup = ({
             </div>
           </div>
           <button
-            className="mt-4 rounded-lg bg-emerald-600 px-4 py-2 font-bold disabled:opacity-25"
+            className="mt-4 rounded-lg bg-emerald-600 px-4 py-2 font-bold text-white disabled:opacity-25"
             onClick={() => setConfirmed(true)}
             disabled={!isConnected}
           >

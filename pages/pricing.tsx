@@ -5,6 +5,7 @@ import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 
 import LunchTrakTag from "@/public/img/lunchtrak/LunchTrakTag.png";
+import Link from "next/link";
 
 const Pricing = () => {
   const prices = {
@@ -56,31 +57,32 @@ const Pricing = () => {
                   <span className="font-semibold text-emerald-500">
                     &#10003;
                   </span>
-                  <span>First premium advantage</span>
+                  <span>
+                    Easily pair with <Link href="/setup">LunchTrak Setup</Link>
+                  </span>
                 </li>
                 <li className="space-x-2">
                   <span className="font-semibold text-emerald-500">
                     &#10003;
                   </span>
-                  <span>Second advantage weekly</span>
+                  <span>Very convinient for students and staff</span>
                 </li>
                 <li className="space-x-2">
                   <span className="font-semibold text-emerald-500">
                     &#10003;
                   </span>
-                  <span>Third advantage donate to project</span>
+                  <span>Meets all CDE standards</span>
                 </li>
               </ul>
 
-              <button
-                type="submit"
-                title="Submit"
-                className="block w-full rounded-xl bg-emerald-600 py-3 px-6 text-center transition hover:bg-emerald-700 focus:bg-indigo-600 active:bg-emerald-800"
+              <Link
+                href="/"
+                className="block w-full rounded-xl bg-emerald-600 py-3 px-6 text-center transition hover:bg-emerald-700 focus:bg-cyan-500 active:bg-emerald-800"
               >
                 <span className="font-semibold text-white">
                   Send us an email
                 </span>
-              </button>
+              </Link>
             </div>
           </div>
 
@@ -98,30 +100,30 @@ const Pricing = () => {
                   <span className="font-semibold text-emerald-500">
                     &#10003;
                   </span>
-                  <span>First premium advantage</span>
+                  <span>Make lunch lines less painful for students</span>
                 </li>
                 <li className="space-x-2">
                   <span className="font-semibold text-emerald-500">
                     &#10003;
                   </span>
-                  <span>Second advantage weekly</span>
+                  <span>No more messy barcode scanners and keypads</span>
                 </li>
                 <li className="space-x-2">
                   <span className="font-semibold text-emerald-500">
                     &#10003;
                   </span>
-                  <span>Third advantage donate to project</span>
+                  <span>More time to run your school events</span>
                 </li>
                 <li className="space-x-2">
                   <span className="font-semibold text-emerald-500">
                     &#10003;
                   </span>
-                  <span>Fourth, access to all components weekly</span>
+                  <span>Full email support at dylan@lunchtrak.com</span>
                 </li>
               </ul>
               <p className="text-gray-700 dark:text-white">
-                Team can be any size, and you can add or switch members as
-                needed. Companies using our platform include:
+                Scholarships are available for schools who are less able to pay
+                the expense. Please contact us for custom quotes.
               </p>
             </div>
           </div>

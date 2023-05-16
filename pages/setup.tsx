@@ -105,10 +105,11 @@ const Setup: NextPage = () => {
               <>
                 {supportsBluetooth ? (
                   <button
-                    className="text-md rounded-lg bg-gradient-to-br from-emerald-400 to-blue-400 px-6 py-4 font-semibold text-white shadow-lg hover:bg-gradient-to-r hover:from-indigo-500 hover:to-blue-500"
+                    className="text-md rounded-lg bg-gradient-to-br from-emerald-400 to-blue-400 px-6 py-4 font-semibold text-white shadow-lg hover:bg-gradient-to-r hover:from-indigo-500 hover:to-blue-500 disabled:from-gray-500 disabled:to-gray-500"
                     onClick={handleConnect}
+                    disabled={isConnected}
                   >
-                    Pair Your Tag
+                    {isConnected ? "Already Connected" : "Pair Your Tag"}
                   </button>
                 ) : (
                   <Unsupported />
