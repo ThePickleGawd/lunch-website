@@ -11,15 +11,15 @@ const Stepper = ({ currentStep, setStep }: StepperProps) => {
       {steps.map((text, index) => (
         <button
           key={text}
-          className={`flex items-center hover:text-blue-600 dark:hover:text-blue-400 ${
-            currentStep >= index ? "text-blue-500 dark:text-blue-300" : ""
+          className={`flex items-center hover:text-cyan-600 dark:hover:text-cyan-400 ${
+            currentStep >= index ? "text-cyan-500 dark:text-cyan-300" : ""
           }`}
           onClick={() => setStep(index)}
         >
           <span
             className={`mr-2 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-xs ${
               currentStep >= index
-                ? "border-blue-500  dark:border-blue-300"
+                ? "border-cyan-500  dark:border-cyan-300"
                 : ""
             }`}
           >

@@ -10,6 +10,9 @@ import { useSleep } from "@/hooks/useSleep";
 import { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import FinishSetup from "@/components/setup/FinishSetup";
 
 enum SetupState {
   PAIR_TAG,
@@ -102,10 +105,11 @@ const Setup: NextPage = () => {
               <>
                 {supportsBluetooth ? (
                   <button
-                    className="text-md rounded-lg bg-gradient-to-br from-emerald-400 to-blue-400 px-6 py-4 font-semibold text-white shadow-lg hover:bg-gradient-to-r hover:from-indigo-500 hover:to-blue-500"
+                    className="text-md rounded-lg bg-gradient-to-br from-emerald-400 to-blue-400 px-6 py-4 font-semibold text-white shadow-lg hover:bg-gradient-to-r hover:from-indigo-500 hover:to-blue-500 disabled:from-gray-500 disabled:to-gray-500"
                     onClick={handleConnect}
+                    disabled={isConnected}
                   >
-                    Pair Your Tag
+                    {isConnected ? "Already Connected" : "Pair Your Tag"}
                   </button>
                 ) : (
                   <Unsupported />
@@ -147,14 +151,11 @@ const Setup: NextPage = () => {
 
             {/* Step Three: Verify */}
             {setupState === SetupState.DONE && (
-              <div className="flex w-full flex-col items-center space-y-2 px-6">
-                <div className="font-semi-bold w-full rounded-lg bg-gray-300 px-4 py-2 text-center text-3xl text-gray-700 dark:bg-trueGray-700 dark:text-white">
-                  {studentID}
-                </div>
-                <div className="font-semi-bold w-full rounded-lg bg-gray-300 px-4 py-2 text-center text-3xl text-gray-700 dark:bg-trueGray-700 dark:text-white">
-                  {schoolID}
-                </div>
-              </div>
+              <FinishSetup
+                studentID={studentID}
+                schoolID={schoolID}
+                isConnected={isConnected}
+              />
             )}
           </div>
         </div>
