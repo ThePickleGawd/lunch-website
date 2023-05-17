@@ -38,12 +38,12 @@ const faqdata = [
     question:
       "Is this program compliant with new California Free Meal Program?",
     answer:
-      "Yes, students will still need to be checked by a cashier for a CDE complient meal. In fact, free lunch means the line moves a lot faster!",
+      "Yes, students will still need to be checked by a cashier for a CDE complient meal. Because lunch is free, lines will be blazing fast!",
   },
   {
     question: "What is your refund policy?",
     answer:
-      "If you have any hardware issues, we'll replace them for free. At the time, however, we are not offering refunds.",
+      "We do not offer refunds. Please email us if you have any questions.",
   },
   {
     question: "Do you offer technical support? ",
