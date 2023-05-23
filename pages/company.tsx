@@ -1,16 +1,35 @@
-import Footer from "@/components/layout/Footer";
+import React from "react";
+import Image from "next/image";
+import Container from "@/components/layout/Container";
+import { NextPage } from "next";
 import Navbar from "@/components/layout/Navbar";
 
-const Company = () => {
+interface CompanyMember {
+  name: string;
+  role: string;
+  image: string;
+  description: string;
+}
+
+interface CompanyPageProps {
+  members: CompanyMember[];
+}
+
+const members: CompanyMember[] = [
+  {
+    name: "Dylan",
+    role: "CEO & Founder",
+    image: "/img/logo.svg",
+    description: "Dylan is the CEO and Founder of LunchTrak",
+  },
+];
+
+const CompanyPage: NextPage = () => {
   return (
     <>
       <Navbar />
-      <div className="flex h-screen w-screen items-center justify-center">
-        Work in progress...
-      </div>
-      <Footer />
     </>
   );
 };
 
-export default Company;
+export default CompanyPage;
