@@ -28,6 +28,15 @@ const CompanyPage: NextPage = () => {
   return (
     <>
       <Navbar />
+      <div className="flex flex-col items-center">
+        <div className="mb-16">work in progress...</div>
+        <Image
+          src="/img/company/dylan.jpg"
+          alt="Dylan"
+          width={500}
+          height={500}
+        />
+      </div>
     </>
   );
 };
