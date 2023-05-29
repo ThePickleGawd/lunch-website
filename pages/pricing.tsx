@@ -75,14 +75,14 @@ const Pricing = () => {
                 </li>
               </ul>
 
-              <Link
-                href="/"
+              <a
+                href="mailto:dylan@lunchtrak.com"
                 className="block w-full rounded-xl bg-emerald-600 py-3 px-6 text-center transition hover:bg-emerald-700 focus:bg-cyan-500 active:bg-emerald-800"
               >
                 <span className="font-semibold text-white">
                   Send us an email
                 </span>
-              </Link>
+              </a>
             </div>
           </div>
 

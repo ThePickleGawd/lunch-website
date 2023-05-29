@@ -52,6 +52,7 @@ const Hero = () => {
               height="617"
               className={"object-cover"}
               alt="Hero Illustration"
+              priority
             />
           </div>
         </div>
