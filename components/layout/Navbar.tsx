@@ -17,7 +17,7 @@ const Navbar = () => {
               <div className="flex w-full flex-wrap items-center justify-between lg:w-auto">
                 <Link
                   href="/"
-                  className="rounded-lg px-4 py-2 hover:bg-gray-200 dark:hover:bg-trueGray-700"
+                  className="rounded-lg px-4 py-2 hover:bg-gray-200 dark:hover:bg-neutral-700"
                 >
                   <span className="flex items-center space-x-2 text-2xl font-medium text-emerald-500 dark:text-gray-100">
                     <span>
@@ -37,7 +37,7 @@ const Navbar = () => {
                   {open && <ThemeChanger />}
                   <Disclosure.Button
                     aria-label="Toggle Menu"
-                    className="ml-auto rounded-md px-2 py-1 text-gray-500 hover:text-emerald-500 focus:bg-emerald-100 focus:text-emerald-500 focus:outline-none dark:text-gray-300 dark:focus:bg-trueGray-700 lg:hidden"
+                    className="ml-auto rounded-md px-2 py-1 text-gray-500 hover:text-emerald-500 focus:bg-emerald-100 focus:text-emerald-500 focus:outline-none dark:text-gray-300 dark:focus:bg-neutral-700 lg:hidden"
                   >
                     <svg
                       className="h-6 w-6 fill-current"

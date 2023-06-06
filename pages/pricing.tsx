@@ -25,7 +25,7 @@ const Pricing = () => {
           <div className="group relative z-10 -mx-4 md:mx-0 md:w-6/12 lg:w-5/12">
             <div
               aria-hidden="true"
-              className="absolute top-0 h-full w-full rounded-2xl bg-white shadow-xl transition duration-500 dark:bg-trueGray-800"
+              className="absolute top-0 h-full w-full rounded-2xl bg-white shadow-xl transition duration-500 dark:bg-neutral-800"
             ></div>
             <div className="relative space-y-6 p-6 lg:p-8">
               <h3 className="text-center text-3xl font-semibold text-gray-700 dark:text-white">
@@ -89,7 +89,7 @@ const Pricing = () => {
           <div className="group relative md:w-6/12 lg:w-7/12">
             <div
               aria-hidden="true"
-              className="absolute top-0 h-full w-full rounded-2xl bg-white shadow-lg dark:bg-trueGray-800"
+              className="absolute top-0 h-full w-full rounded-2xl bg-white shadow-lg dark:bg-neutral-800"
             ></div>
             <div className="relative p-6 pt-16 md:rounded-r-2xl md:p-8 md:pl-12 lg:p-16 lg:pl-20">
               <ul

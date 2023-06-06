@@ -6,12 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "preinstall": "npx only-allow pnpm"
+    "lint": "next lint"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^2.0.17",
+    "@supabase/supabase-js": "^2.24.0",
     "net": "^1.0.2",
     "next": "13.1.6",
     "next-themes": "^0.2.1",
@@ -19,6 +19,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.9",
     "react-icons": "^4.7.1",
+    "supabase": "^1.64.8",
     "tls": "^0.0.1",
     "webbluetooth": "^2.2.0",
     "ws": "^8.9.0"

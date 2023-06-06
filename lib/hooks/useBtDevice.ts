@@ -11,6 +11,7 @@ export interface LunchTrakBluetoothDevice {
   isConnected: boolean;
   studentID: string;
   schoolID: string;
+  bleAddr: string;
   pairDevice: () => Promise<void>;
   refreshLunchData: () => Promise<void>;
   writeStudentID: (text: string) => Promise<boolean>;
@@ -18,12 +19,19 @@ export interface LunchTrakBluetoothDevice {
 }
 
 export const useBtDevice = (): LunchTrakBluetoothDevice => {
+  // Device
   const [isConnected, setIsConnected] = React.useState(false);
   const [supportsBluetooth, setSupportsBluetooth] = React.useState(true);
+
+  // Characteristics
   const [schoolIDChar, setSchoolIDChar] = React.useState<Characteristic>();
   const [studentIDChar, setStudentIDChar] = React.useState<Characteristic>();
+  const [bleAddrChar, setBleAddrChar] = React.useState<Characteristic>();
+
+  // Values
   const [studentID, setStudentID] = React.useState("");
   const [schoolID, setSchoolID] = React.useState("");
+  const [bleAddr, setBleAddr] = React.useState("");
 
   const { sleep } = useSleep();
 
@@ -58,8 +66,12 @@ export const useBtDevice = (): LunchTrakBluetoothDevice => {
   };
 
   const refreshLunchData = async () => {
+    await sleep();
     setStudentID(await readStudentID());
+    await sleep();
     setSchoolID(await readSchoolID());
+    await sleep();
+    setBleAddr(await readBleAddr());
   };
 
   const writeSchoolID = async (text: string) => {
@@ -102,6 +114,18 @@ export const useBtDevice = (): LunchTrakBluetoothDevice => {
     return studentID;
   };
 
+  const readBleAddr = async () => {
+    let hex = await bleAddrChar?.readValue();
+    var data = new Uint8Array(hex!.buffer);
+    let bleAddr = "";
+    data
+      .slice()
+      .reverse()
+      .forEach((byte) => (bleAddr += byte.toString(16).padStart(2, "0")));
+
+    return bleAddr;
+  };
+
   const connect = async (
     device: BluetoothDevice
   ): Promise<BluetoothRemoteGATTServer | null> => {
@@ -111,7 +135,7 @@ export const useBtDevice = (): LunchTrakBluetoothDevice => {
         2,
         async (): Promise<BluetoothRemoteGATTServer | undefined> => {
           time(`Connecting to ${device.name}...`);
-          setIsConnected(false);
+          if (isConnected) setIsConnected(false);
 
           let server = await device.gatt?.connect();
 
@@ -132,8 +156,14 @@ export const useBtDevice = (): LunchTrakBluetoothDevice => {
             "33f68a3f-e981-4fd8-a13c-b6a0edd1928d"
           );
 
+          // BLE Address Characteristic UUID
+          const charBleAddr = await service.getCharacteristic(
+            "44c50732-05a3-4a4b-a9ca-2a13fec120c6"
+          );
+
           setSchoolIDChar(charSchoolID as Characteristic);
           setStudentIDChar(charStudentID as Characteristic);
+          setBleAddrChar(charBleAddr as Characteristic);
           setIsConnected(true);
 
           return server;
@@ -184,6 +214,7 @@ export const useBtDevice = (): LunchTrakBluetoothDevice => {
     isConnected,
     studentID,
     schoolID,
+    bleAddr,
     pairDevice,
     writeStudentID,
     writeSchoolID,
