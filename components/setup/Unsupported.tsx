@@ -1,6 +1,6 @@
 const Unsupported = () => {
   return (
-    <div className="rounded-lg bg-gray-300 p-4 dark:bg-trueGray-700">
+    <div className="rounded-lg bg-gray-300 p-4 dark:bg-neutral-700">
       <div>
         This browser is not supported. Use Chrome on a laptop or android device{" "}
         <a

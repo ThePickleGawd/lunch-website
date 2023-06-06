@@ -20,10 +20,10 @@ const FinishSetup = ({
       ) : (
         <>
           <div className="flex w-full flex-col items-center space-y-2 px-6">
-            <div className="font-semi-bold w-full rounded-lg bg-gray-300 px-4 py-2 text-center text-3xl text-gray-700 dark:bg-trueGray-700 dark:text-white">
+            <div className="font-semi-bold w-full rounded-lg bg-gray-300 px-4 py-2 text-center text-3xl text-gray-700 dark:bg-neutral-700 dark:text-white">
               {studentID}
             </div>
-            <div className="font-semi-bold w-full rounded-lg bg-gray-300 px-4 py-2 text-center text-3xl text-gray-700 dark:bg-trueGray-700 dark:text-white">
+            <div className="font-semi-bold w-full rounded-lg bg-gray-300 px-4 py-2 text-center text-3xl text-gray-700 dark:bg-neutral-700 dark:text-white">
               {schoolID}
             </div>
           </div>

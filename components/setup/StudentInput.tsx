@@ -2,11 +2,17 @@ import { ChangeEvent, ChangeEventHandler, FormEvent, useState } from "react";
 
 interface StudentInputProps {
   value: string;
+  placeholder?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: () => void;
 }
 
-const StudentInput = ({ value, onChange, onSubmit }: StudentInputProps) => {
+const StudentInput = ({
+  value,
+  placeholder,
+  onChange,
+  onSubmit,
+}: StudentInputProps) => {
   const [error, setError] = useState("");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +39,7 @@ const StudentInput = ({ value, onChange, onSubmit }: StudentInputProps) => {
       <input
         type="text"
         id="text"
-        placeholder="950XXXXX"
+        placeholder={placeholder || "950XXXXX"}
         autoComplete="off"
         onChange={handleChange}
         onBlur={() => setError("")}

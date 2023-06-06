@@ -9,7 +9,7 @@ const Footer = () => {
   return (
     <div className="relative">
       <Container>
-        <div className="mx-auto mt-5 grid max-w-screen-xl grid-cols-1 gap-10 border-t border-gray-100 pt-10 dark:border-trueGray-700 lg:grid-cols-5">
+        <div className="mx-auto mt-5 grid max-w-screen-xl grid-cols-1 gap-10 border-t border-gray-100 pt-10 dark:border-neutral-700 lg:grid-cols-5">
           <div className="lg:col-span-2">
             <div>
               {" "}
@@ -41,7 +41,7 @@ const Footer = () => {
                 <Link
                   key={index}
                   href={`/`}
-                  className="w-full rounded-md px-4 py-2 text-gray-500 hover:text-emerald-500 focus:bg-emerald-100 focus:text-emerald-500 focus:outline-none dark:text-gray-300 dark:focus:bg-trueGray-700"
+                  className="w-full rounded-md px-4 py-2 text-gray-500 hover:text-emerald-500 focus:bg-emerald-100 focus:text-emerald-500 focus:outline-none dark:text-gray-300 dark:focus:bg-neutral-700"
                 >
                   {item}
                 </Link>
@@ -54,7 +54,7 @@ const Footer = () => {
                 <Link
                   key={index}
                   href="/"
-                  className="w-full rounded-md px-4 py-2 text-gray-500 hover:text-emerald-500 focus:bg-emerald-100 focus:text-emerald-500 focus:outline-none dark:text-gray-300 dark:focus:bg-trueGray-700"
+                  className="w-full rounded-md px-4 py-2 text-gray-500 hover:text-emerald-500 focus:bg-emerald-100 focus:text-emerald-500 focus:outline-none dark:text-gray-300 dark:focus:bg-neutral-700"
                 >
                   {item}
                 </Link>

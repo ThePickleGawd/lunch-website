@@ -5,8 +5,8 @@ import LoadingCircle from "@/components/setup/LoadingCircle";
 import Stepper from "@/components/setup/Stepper";
 import StudentInput from "@/components/setup/StudentInput";
 import Unsupported from "@/components/setup/Unsupported";
-import { useBtDevice } from "@/hooks/useBtDevice";
-import { useSleep } from "@/hooks/useSleep";
+import { useBtDevice } from "@/lib/hooks/useBtDevice";
+import { useSleep } from "@/lib/hooks/useSleep";
 import { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
@@ -35,6 +35,7 @@ const Setup: NextPage = () => {
     isConnected,
     studentID,
     schoolID,
+    bleAddr,
     pairDevice,
     writeStudentID,
     refreshLunchData,
@@ -42,18 +43,17 @@ const Setup: NextPage = () => {
   const { sleep } = useSleep();
 
   useEffect(() => {
-    return () => {};
-  });
+    console.log("uhh");
+    if (isConnected) refreshLunchData();
+  }, [isConnected]);
 
   const handleConnect = () => {
     // Connect then set lunch data
     setLoading(true);
     pairDevice()
       .then(() => {
-        setLoading(false);
         setSetupState(SetupState.ENTER_ID);
-
-        sleep().then(refreshLunchData);
+        setLoading(false);
       })
       .catch((e) => {
         console.log(e);
@@ -80,6 +80,21 @@ const Setup: NextPage = () => {
     }
 
     setLoading(false);
+
+    fetch("/api/update_tag", {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ student_id: studentID, ble_addr: bleAddr }),
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
@@ -97,7 +112,7 @@ const Setup: NextPage = () => {
       <Container className="flex h-full w-full items-center justify-center">
         <div className="w-[30rem]">
           <Stepper currentStep={setupState} setStep={setSetupState} />
-          <div className="flex h-full w-full flex-col items-center justify-between rounded-lg bg-gray-200 p-8 shadow-sm dark:bg-trueGray-800">
+          <div className="flex h-full w-full flex-col items-center justify-between rounded-lg bg-gray-200 p-8 shadow-sm dark:bg-neutral-800">
             <Instructions currentStep={setupState} />
 
             {/* Step One: Pair tag*/}
@@ -126,6 +141,7 @@ const Setup: NextPage = () => {
                       <StudentInput
                         onChange={(e) => setStudentIDInput(e.target.value)}
                         value={studentIDInput}
+                        placeholder={studentID}
                         onSubmit={handleWriteStudentID}
                       />
                       {writeError !== "" && (
@@ -138,7 +154,7 @@ const Setup: NextPage = () => {
                         Hold on, your device is not connected!
                       </div>
                       <button
-                        className="rounded-lg  px-4 py-2 font-bold text-black hover:bg-gray-300 dark:text-white dark:hover:bg-trueGray-700"
+                        className="rounded-lg  px-4 py-2 font-bold text-black hover:bg-gray-300 dark:text-white dark:hover:bg-neutral-700"
                         onClick={() => setSetupState(SetupState.PAIR_TAG)}
                       >
                         Go Back
