@@ -43,7 +43,6 @@ const Setup: NextPage = () => {
   const { sleep } = useSleep();
 
   useEffect(() => {
-    console.log("uhh");
     if (isConnected) refreshLunchData();
   }, [isConnected]);
 
