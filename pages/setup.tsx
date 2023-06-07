@@ -70,6 +70,24 @@ const Setup: NextPage = () => {
         await refreshLunchData();
 
         setSetupState(SetupState.DONE);
+
+        fetch("/api/update_tag", {
+          method: "POST",
+          headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            student_id: studentIDInput,
+            ble_addr: bleAddr,
+          }),
+        })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((e) => {
+            console.log(e);
+          });
       } else {
         setWriteError("Failed. Please try again or contact support");
       }
@@ -79,21 +97,6 @@ const Setup: NextPage = () => {
     }
 
     setLoading(false);
-
-    fetch("/api/update_tag", {
-      method: "POST",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ student_id: studentID, ble_addr: bleAddr }),
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
   };
 
   return (
