@@ -13,6 +13,8 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import FinishSetup from "@/components/setup/FinishSetup";
+import { instructions } from "@/data/setupInstructions";
+import ImageSlides from "@/components/setup/ImageSlides";
 
 enum SetupState {
   PAIR_TAG,
@@ -116,7 +118,6 @@ const Setup: NextPage = () => {
           <Stepper currentStep={setupState} setStep={setSetupState} />
           <div className="flex h-full w-full flex-col items-center justify-between rounded-lg bg-gray-200 p-8 shadow-sm dark:bg-neutral-800">
             <Instructions currentStep={setupState} />
-
             {/* Step One: Pair tag*/}
             {setupState === SetupState.PAIR_TAG && (
               <>
@@ -174,6 +175,11 @@ const Setup: NextPage = () => {
                 schoolID={schoolID}
                 isConnected={isConnected}
               />
+            )}
+
+            {/* Instruction Images */}
+            {instructions[setupState].images.length > 0 && (
+              <ImageSlides images={instructions[setupState].images} />
             )}
           </div>
         </div>

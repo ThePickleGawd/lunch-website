@@ -24,15 +24,15 @@ const ImageSlides = ({ images }: { images: StaticImageData[] }) => {
   };
 
   return (
-    <div className="relative mt-8 mb-12 w-full">
-      <div className="relative h-96 overflow-hidden rounded-lg">
+    <div className="relative mb-12 mt-8 w-full">
+      <div className="relative h-80 rounded-lg">
         {images.map((src, index) => (
           <div key={index} className="duration-700 ease-in-out">
             <Image
               src={src}
               className={`${
                 index === currentImage ? "" : "hidden"
-              } absolute top-1/2 left-1/2 block w-full -translate-x-1/2 -translate-y-1/2 rounded-lg`}
+              } absolute left-1/2 top-1/2 block w-full -translate-x-1/2 -translate-y-1/2 rounded-lg`}
               alt="..."
             />
           </div>
@@ -54,7 +54,7 @@ const ImageSlides = ({ images }: { images: StaticImageData[] }) => {
       <button
         className={`${
           currentImage === 0 && "hidden"
-        } group absolute top-0 left-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none`}
+        } group absolute left-0 top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none`}
         onClick={handlePrev}
       >
         <span className="inline-flex h-6 w-6 items-center justify-center rounded-full sm:h-8 sm:w-8">
@@ -65,7 +65,7 @@ const ImageSlides = ({ images }: { images: StaticImageData[] }) => {
       <button
         className={`${
           currentImage === images.length - 1 && "hidden"
-        } group absolute top-0 right-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none`}
+        } group absolute right-0 top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none`}
         onClick={handleNext}
       >
         <span className="inline-flex h-6 w-6 items-center justify-center rounded-full sm:h-8 sm:w-8">

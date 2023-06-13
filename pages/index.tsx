@@ -25,11 +25,11 @@ const Home: NextPage = () => {
       </SectionTitle>
       <Benefits data={benefitOne} />
       <Benefits imgPos="right" data={benefitTwo} />
-      {/* <SectionTitle pretitle="Watch a video" title="See LunchTrak in Action">
-        Ok you got us... We haven&apos;t actually demoed our tech anywhere. For
-        now, watch this totally awesome placeholder video.
+      <SectionTitle pretitle="Watch a video" title="Why Choose LunchTrak?">
+        Supercharge your lunch lines so that students can enjoy spending their
+        lunch doing what matters: making friends and exploring their passions.
       </SectionTitle>
-      <Video /> */}
+      <Video />
       {/* <SectionTitle
         pretitle="Testimonials"
         title="Here's what our customers said"
