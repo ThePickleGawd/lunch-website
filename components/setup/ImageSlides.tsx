@@ -32,7 +32,7 @@ const ImageSlides = ({ images }: { images: StaticImageData[] }) => {
               src={src}
               className={`${
                 index === currentImage ? "" : "hidden"
-              } absolute left-1/2 top-1/2 block w-full -translate-x-1/2 -translate-y-1/2 rounded-lg`}
+              } absolute left-1/2 top-1/2 block h-full w-auto -translate-x-1/2 -translate-y-1/2 rounded-lg`}
               alt="..."
             />
           </div>
