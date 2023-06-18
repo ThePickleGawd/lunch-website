@@ -57,7 +57,7 @@ export const useBtDevice = (): LunchTrakBluetoothDevice => {
     const onDisconnected = async (e: Event) => {
       const _device = e.target as BluetoothDevice;
       console.log("Disconnected from device: " + _device.name);
-      await connect(_device);
+      // await connect(_device);
     };
 
     device.addEventListener("gattserverdisconnected", onDisconnected);

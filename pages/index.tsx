@@ -26,7 +26,7 @@ const Home: NextPage = () => {
       <Benefits data={benefitOne} />
       <Benefits imgPos="right" data={benefitTwo} />
       <SectionTitle pretitle="Watch a video" title="Why Choose LunchTrak?">
-        Supercharge your lunch lines so that students can enjoy spending their
+        Supercharge your lunch lines so that students can enjoy spending 
         lunch doing what matters: making friends and exploring their passions.
       </SectionTitle>
       <Video />
