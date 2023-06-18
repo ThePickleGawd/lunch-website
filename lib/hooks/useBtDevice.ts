@@ -3,6 +3,7 @@
 import * as React from "react";
 import { BluetoothRemoteGATTCharacteristic } from "webbluetooth/dist/characteristic";
 import { useSleep } from "./useSleep";
+import { set } from "react-hook-form";
 
 type Characteristic = BluetoothRemoteGATTCharacteristic | undefined;
 
@@ -57,6 +58,9 @@ export const useBtDevice = (): LunchTrakBluetoothDevice => {
     const onDisconnected = async (e: Event) => {
       const _device = e.target as BluetoothDevice;
       console.log("Disconnected from device: " + _device.name);
+
+      setIsConnected(false);
+
       // await connect(_device);
     };
 
